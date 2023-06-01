@@ -1,0 +1,43 @@
+export default function FormExperience(props) {
+  return (
+    <>
+      <h4>{`${props.name})`}</h4>
+      <input
+        id={props.id}
+        placeholder="Role"
+        key={`role${props.id}`}
+        name="role"
+        onChange={props.onChange}
+      ></input>
+      <input
+        id={props.id}
+        placeholder="Company"
+        key={`company${props.id}`}
+        name="company"
+        onChange={props.onChange}
+      ></input>
+
+      <input
+        id={props.id}
+        placeholder="City"
+        key={`city${props.id}`}
+        name="city"
+        onChange={props.onChange}
+      ></input>
+      <input
+        id={props.id}
+        placeholder="From"
+        key={`from${props.id}`}
+        name="from"
+        onChange={props.onChange}
+      ></input>
+      <input
+        id={props.id}
+        placeholder="To"
+        key={`to${props.id}`}
+        name="to"
+        onChange={props.onChange}
+      ></input>
+    </>
+  );
+}
