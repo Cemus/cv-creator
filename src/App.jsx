@@ -70,13 +70,17 @@ export default function App() {
   });
   function handleInformationChange(e) {
     console.log(e.target);
-    const { name, value } = e.target;
-    setInformations((prevInformations) => {
-      return {
-        ...prevInformations,
-        [name]: [value],
-      };
-    });
+    let fileUrl;
+    const { name, value, type } = e.target;
+    if (type === "file") {
+      const file = e.target.files[0];
+      fileUrl = URL.createObjectURL(file);
+      console.log(fileUrl);
+    }
+    setInformations((prevInformations) => ({
+      ...prevInformations,
+      [name]: type === "file" ? [fileUrl] : [value],
+    }));
   }
   return (
     <>

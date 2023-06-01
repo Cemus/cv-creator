@@ -6,6 +6,15 @@ export default function Form(props) {
   return (
     <div className="form-container">
       <form>
+        <h3>Photo</h3>
+        <input
+          type="file"
+          placeholder="Photo"
+          name="photo"
+          accept="image/*"
+          onChange={props.onChange}
+          title="Choose a photo"
+        ></input>
         <h3>Personal Information</h3>
         <input
           placeholder="First Name"
@@ -27,7 +36,6 @@ export default function Form(props) {
           name="description"
           onChange={props.onChange}
         ></input>
-        <p>Photo</p>
         <input
           placeholder="Address"
           name="address"
