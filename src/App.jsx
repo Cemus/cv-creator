@@ -26,37 +26,34 @@ export default function App() {
     from: "",
     to: "",
   };
-  function handleExperienceChange(e) {
+  function handleCareerChange(e, experience) {
     const { id, name, value } = e.target;
     const inputConcernee = name;
-    const experienceCopy = [...experiences];
-    experienceCopy[id][inputConcernee] = value;
-    setExperiences(experienceCopy);
+    if (experience) {
+      const experienceCopy = [...experiences];
+      experienceCopy[id][inputConcernee] = value;
+      setExperiences(experienceCopy);
+    } else {
+      const educationCopy = [...educations];
+      educationCopy[id][inputConcernee] = value;
+      setEducations(educationCopy);
+    }
   }
-  function handleEducationChange(e) {
-    const { id, name, value } = e.target;
-    const inputConcernee = name;
-    const educationCopy = [...educations];
-    educationCopy[id][inputConcernee] = value;
-    setEducations(educationCopy);
-  }
-
-  function addExperience(e) {
+  function addSection(e, experience) {
     e.preventDefault();
-    setExperiences([...experiences, exp]);
+    if (experience) {
+      setExperiences([...experiences, exp]);
+    } else {
+      setEducations([...educations, edu]);
+    }
   }
-  function deleteExperience(e) {
+  function deleteSection(e, experience) {
     e.preventDefault();
-    setExperiences((prevExp) => prevExp.slice(0, -1));
-  }
-
-  function addEducation(e) {
-    e.preventDefault();
-    setEducations([...educations, edu]);
-  }
-  function deleteEducation(e) {
-    e.preventDefault();
-    setEducations((prevEdu) => prevEdu.slice(0, -1));
+    if (experience) {
+      setExperiences((prevExp) => prevExp.slice(0, -1));
+    } else {
+      setEducations((prevEdu) => prevEdu.slice(0, -1));
+    }
   }
   const [informations, setInformations] = useState({
     firstName: "Gerald",
@@ -69,7 +66,6 @@ export default function App() {
     email: "77@lol.com",
   });
   function handleInformationChange(e) {
-    console.log(e.target);
     let fileUrl;
     const { name, value, type } = e.target;
     if (type === "file") {
@@ -87,15 +83,12 @@ export default function App() {
       <Header />
       <div className="global-container">
         <Form
-          onChange={handleInformationChange}
           experiences={experiences}
           educations={educations}
-          onExperiencesChange={handleExperienceChange}
-          onEducationChange={handleEducationChange}
-          addExperience={addExperience}
-          deleteExperience={deleteExperience}
-          addEducation={addEducation}
-          deleteEducation={deleteEducation}
+          onChange={handleInformationChange}
+          onCareerChange={handleCareerChange}
+          addSection={addSection}
+          deleteSection={deleteSection}
         />
         <DisplayCV
           experiences={experiences}

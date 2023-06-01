@@ -57,22 +57,22 @@ export default function Form(props) {
             key={item.id}
             id={item.id}
             name={item.id + 1}
-            onChange={props.onExperiencesChange}
+            onChange={(e) => props.onCareerChange(e, true)}
           />
         ))}
-        <button onClick={props.deleteExperience}>Delete</button>
-        <button onClick={props.addExperience}>Add</button>
+        <button onClick={(e) => props.deleteSection(e, true)}>Delete</button>
+        <button onClick={(e) => props.addSection(e, true)}>Add</button>
         <h3>Education</h3>
         {props.educations.map((item) => (
           <FormEducation
             key={item.id}
             id={item.id}
             name={item.id + 1}
-            onChange={props.onEducationChange}
+            onChange={(e) => props.onCareerChange(e, false)}
           />
         ))}
-        <button onClick={props.deleteEducation}>Delete</button>
-        <button onClick={props.addEducation}>Add</button>
+        <button onClick={(e) => props.deleteSection(e, false)}>Delete</button>
+        <button onClick={(e) => props.addSection(e, false)}>Add</button>
       </form>
     </div>
   );
