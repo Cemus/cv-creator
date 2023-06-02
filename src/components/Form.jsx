@@ -4,9 +4,9 @@ import FormEducation from "./FormEducation";
 
 export default function Form(props) {
   return (
-    <div className="form-container">
+    <div className="form--container">
       <form>
-        <h3>Photo</h3>
+        <h3 className="form--title">Photo</h3>
         <input
           type="file"
           placeholder="Photo"
@@ -15,7 +15,7 @@ export default function Form(props) {
           onChange={props.onChange}
           title="Choose a photo"
         ></input>
-        <h3>Personal Information</h3>
+        <h3 className="form--title">Personal Information</h3>
         <input
           placeholder="First Name"
           name="firstName"
@@ -51,7 +51,7 @@ export default function Form(props) {
           name="email"
           onChange={props.onChange}
         ></input>
-        <h3>Experience</h3>
+        <h3 className="form--title">Experience</h3>
         {props.experiences.map((item) => (
           <FormExperience
             key={item.id}
@@ -60,9 +60,19 @@ export default function Form(props) {
             onChange={(e) => props.onCareerChange(e, true)}
           />
         ))}
-        <button onClick={(e) => props.deleteSection(e, true)}>Delete</button>
-        <button onClick={(e) => props.addSection(e, true)}>Add</button>
-        <h3>Education</h3>
+        <button
+          className="form--button"
+          onClick={(e) => props.deleteSection(e, true)}
+        >
+          Delete
+        </button>
+        <button
+          className="form--button"
+          onClick={(e) => props.addSection(e, true)}
+        >
+          Add
+        </button>
+        <h3 className="form--title">Education</h3>
         {props.educations.map((item) => (
           <FormEducation
             key={item.id}
@@ -71,8 +81,18 @@ export default function Form(props) {
             onChange={(e) => props.onCareerChange(e, false)}
           />
         ))}
-        <button onClick={(e) => props.deleteSection(e, false)}>Delete</button>
-        <button onClick={(e) => props.addSection(e, false)}>Add</button>
+        <button
+          className="form--button"
+          onClick={(e) => props.deleteSection(e, false)}
+        >
+          Delete
+        </button>
+        <button
+          className="form--button"
+          onClick={(e) => props.addSection(e, false)}
+        >
+          Add
+        </button>
       </form>
     </div>
   );

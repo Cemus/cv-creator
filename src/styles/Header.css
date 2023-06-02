@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 header {
-  background-color: rgb(114, 114, 114);
+  background-color: var(--main);
   padding: 2.5rem;
 }
 
 .title--header {
-  color: white;
+  color: var(--lightShades);
   margin-left: 3rem;
   font-family: "Roboto", sans-serif;
   font-size: 3rem;
