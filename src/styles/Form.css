@@ -54,3 +54,14 @@ input::placeholder {
   color: white;
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  .form--container {
+    max-width: 80vw;
+    align-content: center;
+    justify-content: center;
+  }
+  form {
+    max-width: 60vw;
+  }
+}

@@ -19,3 +19,10 @@
   justify-content: space-evenly;
   background-color: var(--darkShades);
 }
+
+@media screen and (max-width: 768px) {
+  .global-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}

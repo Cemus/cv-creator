@@ -11,3 +11,10 @@ header {
   font-family: "Roboto", sans-serif;
   font-size: 3rem;
 }
+
+@media screen and (max-width: 768px) {
+  .title--header {
+    margin: 0;
+    text-align: center;
+  }
+}
