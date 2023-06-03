@@ -54,9 +54,7 @@ export default function DisplayCV(props) {
           <img
             className="cv--image"
             src={
-              props.photo !== ""
-                ? props.photo
-                : "../../.../public/assets/no-avatar.png"
+              props.photo !== "" ? props.photo : "../../assets/no-avatar.png"
             }
           />
           <h3 className="cv--title">Personal Details</h3>
