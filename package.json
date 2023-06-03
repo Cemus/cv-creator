@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "http://Cemu.github.io/cv-creator",
+  "homepage": "http://cemus.github.io/cv-creator",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
