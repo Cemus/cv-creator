@@ -4,6 +4,7 @@ import FormExperience from "./FormExperience";
 import FormEducation from "./FormEducation";
 
 export default function Form({
+  language,
   onChange,
   experiences,
   onCareerChange,
@@ -29,33 +30,54 @@ export default function Form({
           onChange={onChange}
           title="Choose a photo"
         ></input>
-        <h3 className="form--title">Personal Information</h3>
+        <h3 className="form--title">
+          {language === "french"
+            ? "Information Personnelle"
+            : "Personal Information"}
+        </h3>
         <input
-          placeholder="First Name"
+          placeholder={language === "french" ? "Prénom" : "First name"}
           name="firstName"
           onChange={onChange}
         ></input>
         <input
-          placeholder="Last Name"
+          placeholder={language === "french" ? "Nom de famille" : "Last name"}
           name="lastName"
           onChange={onChange}
         ></input>
-        <input placeholder="Title" name="title" onChange={onChange}></input>
+        <input
+          placeholder={language === "french" ? "Métier" : "Title"}
+          name="title"
+          onChange={onChange}
+        ></input>
         <input
           placeholder="Description"
           name="description"
           onChange={onChange}
         ></input>
-        <input placeholder="Address" name="address" onChange={onChange}></input>
         <input
-          placeholder="Phone number"
+          placeholder={language === "french" ? "Adresse" : "Address"}
+          name="address"
+          onChange={onChange}
+        ></input>
+        <input
+          placeholder={
+            language === "french" ? "Numéro de téléphone" : "Phone number"
+          }
           name="phoneNumber"
           onChange={onChange}
         ></input>
-        <input placeholder="Email" name="email" onChange={onChange}></input>
-        <h3 className="form--title">Experience</h3>
+        <input
+          placeholder={language === "french" ? "Courriel" : "Email"}
+          name="email"
+          onChange={onChange}
+        ></input>
+        <h3 className="form--title">
+          {language === "french" ? "Expérience" : "Experience"}
+        </h3>
         {experiences.map((item) => (
           <FormExperience
+            language={language}
             key={item.id}
             id={item.id}
             name={item.id + 1}
@@ -66,14 +88,17 @@ export default function Form({
           className="form--button"
           onClick={(e) => deleteSection(e, true)}
         >
-          Delete
+          {language === "french" ? "Supprimer" : "Delete"}
         </button>
         <button className="form--button" onClick={(e) => addSection(e, true)}>
-          Add
+          {language === "french" ? "Ajouter" : "Add"}
         </button>
-        <h3 className="form--title">Education</h3>
+        <h3 className="form--title">
+          {language === "french" ? "Formation" : "Education"}
+        </h3>
         {educations.map((item) => (
           <FormEducation
+            language={language}
             key={item.id}
             id={item.id}
             name={item.id + 1}
@@ -84,17 +109,19 @@ export default function Form({
           className="form--button"
           onClick={(e) => deleteSection(e, false)}
         >
-          Delete
+          {language === "french" ? "Supprimer" : "Delete"}
         </button>
         <button className="form--button" onClick={(e) => addSection(e, false)}>
-          Add
+          {language === "french" ? "Ajouter" : "Add"}
         </button>
-        <h3 className="form--title">Download as PDF</h3>
+        <h3 className="form--title">
+          {language === "french" ? "Téléchargement en PDF" : "Download as PDF"}
+        </h3>
         <button
           className="form--button"
           onClick={(e) => handleDownloadClick(e)}
         >
-          Download
+          {language === "french" ? "Télécharger" : "Download"}
         </button>
       </form>
     </div>

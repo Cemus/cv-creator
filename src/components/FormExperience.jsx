@@ -4,14 +4,14 @@ export default function FormExperience(props) {
       <h4>{`${props.name})`}</h4>
       <input
         id={props.id}
-        placeholder="Role"
+        placeholder={props.language === "french" ? "Fonction" : "Role"}
         key={`role${props.id}`}
         name="role"
         onChange={props.onChange}
       ></input>
       <input
         id={props.id}
-        placeholder="Company"
+        placeholder={props.language === "french" ? "Entreprise" : "Company"}
         key={`company${props.id}`}
         name="company"
         onChange={props.onChange}
@@ -19,21 +19,21 @@ export default function FormExperience(props) {
 
       <input
         id={props.id}
-        placeholder="City"
+        placeholder={props.language === "french" ? "Ville" : "City"}
         key={`city${props.id}`}
         name="city"
         onChange={props.onChange}
       ></input>
       <input
         id={props.id}
-        placeholder="From"
+        placeholder={props.language === "french" ? "De" : "From"}
         key={`from${props.id}`}
         name="from"
         onChange={props.onChange}
       ></input>
       <input
         id={props.id}
-        placeholder="To"
+        placeholder={props.language === "french" ? "À" : "To"}
         key={`to${props.id}`}
         name="to"
         onChange={props.onChange}

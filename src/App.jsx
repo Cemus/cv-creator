@@ -6,9 +6,13 @@ import DisplayCV from "./components/DisplayCV";
 import { useState } from "react";
 
 export default function App() {
-  const { toPDF, targetRef } = usePDF({ filename: "cv.pdf" });
   const [experiences, setExperiences] = useState([]);
   const [educations, setEducations] = useState([]);
+  const [language, setLanguage] = useState("english");
+  function handleLanguageChange(e, newLanguage) {
+    e.preventDefault();
+    setLanguage(newLanguage);
+  }
   const exp = {
     id: experiences.length,
     key: experiences.length,
@@ -28,6 +32,21 @@ export default function App() {
     from: "",
     to: "",
   };
+  const [informations, setInformations] = useState({
+    firstName: "Gerald",
+    lastName: "Joyce",
+    title: "Palefrenier",
+    description: "Un bon monsieur, plein d'envie !",
+    photo: "",
+    address: "16 rue des alouettes",
+    phoneNumber: "77 77 77 77 77",
+    email: "77@lol.com",
+  });
+  const { toPDF, targetRef } = usePDF({
+    filename: `CV ${informations.firstName} ${
+      informations.lastName
+    } - ${new Date().getFullYear()}.pdf`,
+  });
   function handleCareerChange(e, experience) {
     const { id, name, value } = e.target;
     const inputConcernee = name;
@@ -57,16 +76,7 @@ export default function App() {
       setEducations((prevEdu) => prevEdu.slice(0, -1));
     }
   }
-  const [informations, setInformations] = useState({
-    firstName: "Gerald",
-    lastName: "Joyce",
-    title: "Palefrenier",
-    description: "Un bon monsieur, plein d'envie !",
-    photo: "",
-    address: "16 rue des alouettes",
-    phoneNumber: "77 77 77 77 77",
-    email: "77@lol.com",
-  });
+
   function handleInformationChange(e) {
     let fileUrl;
     const { name, value, type } = e.target;
@@ -75,6 +85,7 @@ export default function App() {
       fileUrl = URL.createObjectURL(file);
       console.log(fileUrl);
     }
+
     setInformations((prevInformations) => ({
       ...prevInformations,
       [name]: type === "file" ? [fileUrl] : [value],
@@ -82,9 +93,10 @@ export default function App() {
   }
   return (
     <>
-      <Header />
+      <Header handleLanguageChange={handleLanguageChange} />
       <div className="global-container">
         <Form
+          language={language}
           experiences={experiences}
           educations={educations}
           onChange={handleInformationChange}
@@ -95,6 +107,7 @@ export default function App() {
         />
         <div ref={targetRef}>
           <DisplayCV
+            language={language}
             experiences={experiences}
             educations={educations}
             firstName={informations.firstName}
