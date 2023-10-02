@@ -1,7 +1,6 @@
 import "../styles/DisplayCV.css";
 
 export default function DisplayCV(props) {
-  console.log(props.photo);
   const experiencesRenderer = props.experiences.map((exp) => {
     return (
       <div key={exp.id} className="cv--career">
@@ -51,10 +50,7 @@ export default function DisplayCV(props) {
       </div>
       <div className="cv--aside">
         <aside>
-          <img
-            className="cv--image"
-            src={props.photo !== "" ? props.photo : "./no-avatar.png"}
-          />
+          {props.photo && <img className="cv--image" src={props.photo} />}
           <h3 className="cv--title">Personal Details</h3>
           <div className="cv--personal-details-container">
             <div className="cv--personal-details">

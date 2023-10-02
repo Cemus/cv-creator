@@ -1,10 +1,12 @@
 import "./App.css";
+import { usePDF } from "react-to-pdf";
 import Header from "./components/Header";
 import Form from "./components/Form";
 import DisplayCV from "./components/DisplayCV";
 import { useState } from "react";
 
 export default function App() {
+  const { toPDF, targetRef } = usePDF({ filename: "cv.pdf" });
   const [experiences, setExperiences] = useState([]);
   const [educations, setEducations] = useState([]);
   const exp = {
@@ -89,19 +91,22 @@ export default function App() {
           onCareerChange={handleCareerChange}
           addSection={addSection}
           deleteSection={deleteSection}
+          toPDF={toPDF}
         />
-        <DisplayCV
-          experiences={experiences}
-          educations={educations}
-          firstName={informations.firstName}
-          lastName={informations.lastName}
-          title={informations.title}
-          description={informations.description}
-          photo={informations.photo}
-          address={informations.address}
-          phoneNumber={informations.phoneNumber}
-          email={informations.email}
-        />
+        <div ref={targetRef}>
+          <DisplayCV
+            experiences={experiences}
+            educations={educations}
+            firstName={informations.firstName}
+            lastName={informations.lastName}
+            title={informations.title}
+            description={informations.description}
+            photo={informations.photo}
+            address={informations.address}
+            phoneNumber={informations.phoneNumber}
+            email={informations.email}
+          />
+        </div>
       </div>
     </>
   );

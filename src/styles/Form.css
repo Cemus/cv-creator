@@ -19,7 +19,8 @@ form {
 }
 
 input,
-input[type="file"] {
+input[type="file"],
+textarea {
   border-style: none;
   background-color: var(--darkShades);
   padding: 0.5rem;

@@ -1,8 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 header {
+  display: flex;
+  gap: 2rem;
   background-color: var(--main);
   padding: 2.5rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .title--header {
@@ -12,9 +16,35 @@ header {
   font-size: 3rem;
 }
 
+.flagButton--header {
+  display: flex;
+  cursor: pointer;
+  border-color: var(--darkShades);
+  border-style: solid;
+}
+
+.flagButton--header:hover {
+  border-color: var(--lightShades);
+  border-style: solid;
+  transition-duration: 500ms;
+}
+
+.flags {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.flag--header {
+  height: 4vh;
+}
+
 @media screen and (max-width: 768px) {
   .title--header {
     margin: 0;
     text-align: center;
+  }
+  header {
+    flex-direction: column;
   }
 }
