@@ -51,7 +51,7 @@ export default function Form({
           onChange={onChange}
         ></input>
         <input
-          placeholder="Description"
+          placeholder={language === "french" ? "Profil" : "Description"}
           name="description"
           onChange={onChange}
         ></input>

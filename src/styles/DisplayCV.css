@@ -81,7 +81,7 @@ main {
 
 .cv--aside {
   grid-area: right;
-  background-color: var(--lightShades);
+  background-color: #cac9ca;
 }
 
 aside {
@@ -90,7 +90,6 @@ aside {
   margin: 1rem;
 }
 
-/*flexer tout ça*/
 .cv--image {
   width: 10vw;
   align-self: center;

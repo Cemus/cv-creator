@@ -1,8 +1,10 @@
 import "../styles/Header.css";
-export default function Headers({ handleLanguageChange }) {
+export default function Headers({ language, handleLanguageChange }) {
   return (
     <header>
-      <h1 className="title--header">CV CREATOR</h1>
+      <h1 className="title--header">
+        {language === "french" ? "- CREATEUR DE CV -" : "- CV CREATOR -"}
+      </h1>
       <div className="flags">
         <button
           onClick={(e) => handleLanguageChange(e, "french")}

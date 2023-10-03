@@ -93,7 +93,7 @@ export default function App() {
   }
   return (
     <>
-      <Header handleLanguageChange={handleLanguageChange} />
+      <Header language={language} handleLanguageChange={handleLanguageChange} />
       <div className="global-container">
         <Form
           language={language}
