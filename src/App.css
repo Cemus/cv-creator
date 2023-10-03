@@ -18,9 +18,10 @@
   display: flex;
   justify-content: space-evenly;
   background-color: var(--darkShades);
+  padding: 2rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1440px) {
   .global-container {
     flex-direction: column;
     align-items: center;
