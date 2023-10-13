@@ -1,13 +1,17 @@
 import "../styles/Form.css";
 
+import FormSkill from "./FormSkill";
+import FormProject from "./FormProject";
 import FormExperience from "./FormExperience";
 import FormEducation from "./FormEducation";
 
 export default function Form({
   language,
   onChange,
+  skills,
+  projects,
   experiences,
-  onCareerChange,
+  onCustomPartChange,
   deleteSection,
   addSection,
   educations,
@@ -30,6 +34,7 @@ export default function Form({
           onChange={onChange}
           title="Choose a photo"
         ></input>
+
         <h3 className="form--title">
           {language === "french"
             ? "Information Personnelle"
@@ -50,11 +55,11 @@ export default function Form({
           name="title"
           onChange={onChange}
         ></input>
-        <input
+        <textarea
           placeholder={language === "french" ? "Profil" : "Description"}
           name="description"
           onChange={onChange}
-        ></input>
+        ></textarea>
         <input
           placeholder={language === "french" ? "Adresse" : "Address"}
           name="address"
@@ -72,6 +77,32 @@ export default function Form({
           name="email"
           onChange={onChange}
         ></input>
+
+        <h3 className="form--title">
+          {language === "french" ? "Projet" : "Project"}
+        </h3>
+        {projects.map((item) => (
+          <FormProject
+            language={language}
+            key={item.id}
+            id={item.id}
+            name={item.id + 1}
+            onChange={(e) => onCustomPartChange(e, "project")}
+          />
+        ))}
+        <button
+          className="form--button"
+          onClick={(e) => deleteSection(e, "project")}
+        >
+          {language === "french" ? "Supprimer" : "Delete"}
+        </button>
+        <button
+          className="form--button"
+          onClick={(e) => addSection(e, "project")}
+        >
+          {language === "french" ? "Ajouter" : "Add"}
+        </button>
+
         <h3 className="form--title">
           {language === "french" ? "Expérience" : "Experience"}
         </h3>
@@ -81,18 +112,22 @@ export default function Form({
             key={item.id}
             id={item.id}
             name={item.id + 1}
-            onChange={(e) => onCareerChange(e, true)}
+            onChange={(e) => onCustomPartChange(e, "experience")}
           />
         ))}
         <button
           className="form--button"
-          onClick={(e) => deleteSection(e, true)}
+          onClick={(e) => deleteSection(e, "experience")}
         >
           {language === "french" ? "Supprimer" : "Delete"}
         </button>
-        <button className="form--button" onClick={(e) => addSection(e, true)}>
+        <button
+          className="form--button"
+          onClick={(e) => addSection(e, "experience")}
+        >
           {language === "french" ? "Ajouter" : "Add"}
         </button>
+
         <h3 className="form--title">
           {language === "french" ? "Formation" : "Education"}
         </h3>
@@ -102,18 +137,56 @@ export default function Form({
             key={item.id}
             id={item.id}
             name={item.id + 1}
-            onChange={(e) => onCareerChange(e, false)}
+            onChange={(e) => onCustomPartChange(e, "education")}
           />
         ))}
         <button
           className="form--button"
-          onClick={(e) => deleteSection(e, false)}
+          onClick={(e) => deleteSection(e, "education")}
         >
           {language === "french" ? "Supprimer" : "Delete"}
         </button>
-        <button className="form--button" onClick={(e) => addSection(e, false)}>
+        <button
+          className="form--button"
+          onClick={(e) => addSection(e, "education")}
+        >
           {language === "french" ? "Ajouter" : "Add"}
         </button>
+
+        <h3 className="form--title">
+          {language === "french" ? "Compétences" : "Skills"}
+        </h3>
+        {skills.map((item) => (
+          <FormSkill
+            language={language}
+            key={item.id}
+            id={item.id}
+            name={item.id + 1}
+            onChange={(e) => onCustomPartChange(e, "skill")}
+          />
+        ))}
+        <button
+          className="form--button"
+          onClick={(e) => deleteSection(e, "skill")}
+        >
+          {language === "french" ? "Supprimer" : "Delete"}
+        </button>
+        <button
+          className="form--button"
+          onClick={(e) => addSection(e, "skill")}
+        >
+          {language === "french" ? "Ajouter" : "Add"}
+        </button>
+
+        <h3 className="form--title">
+          {language === "french" ? "Loisirs" : "Hobbies"}
+        </h3>
+        <textarea
+          placeholder={language === "french" ? "Intérêts" : "Interests"}
+          name="hobbies"
+          onChange={onChange}
+        ></textarea>
+
         <h3 className="form--title">
           {language === "french" ? "Téléchargement en PDF" : "Download as PDF"}
         </h3>

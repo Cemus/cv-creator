@@ -6,13 +6,31 @@ import DisplayCV from "./components/DisplayCV";
 import { useState } from "react";
 
 export default function App() {
-  const [experiences, setExperiences] = useState([]);
-  const [educations, setEducations] = useState([]);
   const [language, setLanguage] = useState("english");
   function handleLanguageChange(e, newLanguage) {
     e.preventDefault();
     setLanguage(newLanguage);
   }
+
+  const [skills, setSkills] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [experiences, setExperiences] = useState([]);
+  const [educations, setEducations] = useState([]);
+
+  const ski = {
+    id: skills.length,
+    key: skills.length,
+    skill: "",
+  };
+  const pro = {
+    id: projects.length,
+    key: projects.length,
+    name: "",
+    stack: "",
+    feat1: "",
+    feat2: "",
+    feat3: "",
+  };
   const exp = {
     id: experiences.length,
     key: experiences.length,
@@ -32,48 +50,92 @@ export default function App() {
     from: "",
     to: "",
   };
+
   const [informations, setInformations] = useState({
-    firstName: "Gerald",
+    firstName: "Ryu",
     lastName: "Joyce",
-    title: "Palefrenier",
-    description: "Un bon monsieur, plein d'envie !",
+    title: "Plongeur",
+    description: "Le maître du karate!",
     photo: "",
-    address: "16 rue des alouettes",
+    address: "San Fransisco",
     phoneNumber: "77 77 77 77 77",
     email: "77@lol.com",
+    hobbies: "",
   });
+
   const { toPDF, targetRef } = usePDF({
     filename: `CV ${informations.firstName} ${
       informations.lastName
     } - ${new Date().getFullYear()}.pdf`,
   });
-  function handleCareerChange(e, experience) {
+
+  function handleCustomPartChange(e, sectionName) {
     const { id, name, value } = e.target;
     const inputConcernee = name;
-    if (experience) {
-      const experienceCopy = [...experiences];
-      experienceCopy[id][inputConcernee] = value;
-      setExperiences(experienceCopy);
-    } else {
-      const educationCopy = [...educations];
-      educationCopy[id][inputConcernee] = value;
-      setEducations(educationCopy);
+    switch (sectionName) {
+      case "skill":
+        {
+          const skillCopy = [...skills];
+          skillCopy[id][inputConcernee] = value;
+          setSkills(skillCopy);
+        }
+        break;
+      case "project":
+        {
+          const projectCopy = [...projects];
+          projectCopy[id][inputConcernee] = value;
+          setProjects(projectCopy);
+        }
+        break;
+      case "experience":
+        {
+          const experienceCopy = [...experiences];
+          experienceCopy[id][inputConcernee] = value;
+          setExperiences(experienceCopy);
+        }
+        break;
+
+      case "education":
+        {
+          const educationCopy = [...educations];
+          educationCopy[id][inputConcernee] = value;
+          setEducations(educationCopy);
+        }
+        break;
     }
   }
-  function addSection(e, experience) {
+  function addSection(e, sectionName) {
     e.preventDefault();
-    if (experience) {
-      setExperiences([...experiences, exp]);
-    } else {
-      setEducations([...educations, edu]);
+    switch (sectionName) {
+      case "skill":
+        setSkills([...skills, ski]);
+        break;
+      case "project":
+        setProjects([...projects, pro]);
+        break;
+      case "experience":
+        setExperiences([...experiences, exp]);
+        break;
+      case "education":
+        setEducations([...educations, edu]);
+        break;
     }
   }
-  function deleteSection(e, experience) {
+  function deleteSection(e, sectionName) {
     e.preventDefault();
-    if (experience) {
-      setExperiences((prevExp) => prevExp.slice(0, -1));
-    } else {
-      setEducations((prevEdu) => prevEdu.slice(0, -1));
+    switch (sectionName) {
+      case "skill":
+        setSkills((prevSki) => prevSki.slice(0, -1));
+        break;
+      case "project":
+        setProjects((prevPro) => prevPro.slice(0, -1));
+        break;
+      case "experience":
+        setExperiences((prevExp) => prevExp.slice(0, -1));
+        break;
+      case "education":
+        setEducations((prevEdu) => prevEdu.slice(0, -1));
+        break;
     }
   }
 
@@ -97,10 +159,12 @@ export default function App() {
       <div className="global-container">
         <Form
           language={language}
+          skills={skills}
+          projects={projects}
           experiences={experiences}
           educations={educations}
           onChange={handleInformationChange}
-          onCareerChange={handleCareerChange}
+          onCustomPartChange={handleCustomPartChange}
           addSection={addSection}
           deleteSection={deleteSection}
           toPDF={toPDF}
@@ -108,6 +172,8 @@ export default function App() {
         <div ref={targetRef}>
           <DisplayCV
             language={language}
+            skills={skills}
+            projects={projects}
             experiences={experiences}
             educations={educations}
             firstName={informations.firstName}
@@ -118,6 +184,7 @@ export default function App() {
             address={informations.address}
             phoneNumber={informations.phoneNumber}
             email={informations.email}
+            hobbies={informations.hobbies}
           />
         </div>
       </div>
