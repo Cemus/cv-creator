@@ -1,9 +1,9 @@
 import "./App.css";
-import { usePDF } from "react-to-pdf";
+import html2pdf from "html2pdf.js";
 import Header from "./components/Header";
 import Form from "./components/Form";
 import DisplayCV from "./components/DisplayCV";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function App() {
   const [language, setLanguage] = useState("english");
@@ -63,11 +63,29 @@ export default function App() {
     hobbies: "",
   });
 
-  const { toPDF, targetRef } = usePDF({
-    filename: `CV ${informations.firstName} ${
-      informations.lastName
-    } - ${new Date().getFullYear()}.pdf`,
-  });
+  const pdfRef = useRef(null);
+  const handleDownloadPDF = () => {
+    const opt = {
+      filename: `CV ${informations.firstName} ${
+        informations.lastName
+      } ${new Date().getFullYear()}`,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      pagebreak: { avoid: ".noPageBreak" },
+    };
+    const element = pdfRef.current;
+    html2pdf()
+      .from(element)
+      .set(opt)
+      .toPdf()
+      .get("pdf")
+      .then(function (pdf) {
+        var totalPages = pdf.internal.getNumberOfPages();
+        pdf.deletePage(totalPages);
+      })
+      .save();
+  };
 
   function handleCustomPartChange(e, sectionName) {
     const { id, name, value } = e.target;
@@ -167,9 +185,9 @@ export default function App() {
           onCustomPartChange={handleCustomPartChange}
           addSection={addSection}
           deleteSection={deleteSection}
-          toPDF={toPDF}
+          toPDF={handleDownloadPDF}
         />
-        <div ref={targetRef}>
+        <div className="noPageBreak" ref={pdfRef}>
           <DisplayCV
             language={language}
             skills={skills}

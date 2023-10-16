@@ -135,7 +135,7 @@ export default function DisplayCV(props) {
                   ? "Centres d'intérêt"
                   : "Interests"}
               </h3>
-              <p className="cv--hobbies">{props.hobbies}</p>
+              <p>{props.hobbies}</p>
             </div>
           )}
         </section>
