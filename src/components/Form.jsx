@@ -1,5 +1,6 @@
 import "../styles/Form.css";
 
+import { useState } from "react";
 import FormSkill from "./FormSkill";
 import FormProject from "./FormProject";
 import FormExperience from "./FormExperience";
@@ -11,12 +12,29 @@ export default function Form({
   skills,
   projects,
   experiences,
+  educations,
+  firstName,
+  lastName,
+  title,
+  description,
+  address,
+  phoneNumber,
+  email,
+  website,
+  linkedIn,
+  gitHub,
+  hobbies,
   onCustomPartChange,
   deleteSection,
   addSection,
-  educations,
   toPDF,
 }) {
+  const [personalInformationVisible, setPersonalInformationVisible] =
+    useState(true);
+  const [projectsVisible, setProjectsVisible] = useState(true);
+  const [experiencesVisible, setExperiencesVisible] = useState(true);
+  const [educationsVisible, setEducationsVisible] = useState(true);
+  const [skillsVisible, setSkillsVisible] = useState(true);
   function handleDownloadClick(e) {
     e.preventDefault();
     toPDF();
@@ -34,6 +52,7 @@ export default function Form({
             accept="image/*"
             onChange={onChange}
             title="Choose a photo"
+            autoComplete="photo"
           ></input>
         </div>
 
@@ -43,69 +62,111 @@ export default function Form({
               ? "Information Personnelle"
               : "Personal Information"}
           </h3>
-          <input
-            placeholder={language === "french" ? "Prénom" : "First name"}
-            name="firstName"
-            onChange={onChange}
-          ></input>
-          <input
-            placeholder={language === "french" ? "Nom de famille" : "Last name"}
-            name="lastName"
-            onChange={onChange}
-          ></input>
-          <input
-            placeholder={language === "french" ? "Métier" : "Title"}
-            name="title"
-            onChange={onChange}
-          ></input>
-          <textarea
-            placeholder={language === "french" ? "Profil" : "Description"}
-            name="description"
-            onChange={onChange}
-          ></textarea>
-          <input
-            placeholder={language === "french" ? "Adresse" : "Address"}
-            name="address"
-            onChange={onChange}
-          ></input>
-          <input
-            placeholder={
-              language === "french" ? "Numéro de téléphone" : "Phone number"
-            }
-            name="phoneNumber"
-            onChange={onChange}
-          ></input>
-          <input
-            placeholder={language === "french" ? "Courriel" : "Email"}
-            name="email"
-            onChange={onChange}
-          ></input>
-          <input
-            placeholder={language === "french" ? "Site web" : "Website"}
-            name="website"
-            onChange={onChange}
-          ></input>
-          <input placeholder="GitHub" name="gitHub" onChange={onChange}></input>
-          <input
-            placeholder="LinkedIn"
-            name="linkedIn"
-            onChange={onChange}
-          ></input>
+          {personalInformationVisible && (
+            <>
+              <input
+                placeholder={language === "french" ? "Prénom" : "First name"}
+                name="firstName"
+                onChange={onChange}
+                value={firstName || ""}
+                autoComplete="given-name"
+              ></input>
+              <input
+                placeholder={
+                  language === "french" ? "Nom de famille" : "Last name"
+                }
+                name="lastName"
+                onChange={onChange}
+                value={lastName || ""}
+                autoComplete="family-name"
+              ></input>
+              <input
+                placeholder={language === "french" ? "Métier" : "Title"}
+                name="title"
+                onChange={onChange}
+                value={title || ""}
+              ></input>
+              <textarea
+                placeholder={language === "french" ? "Profil" : "Description"}
+                name="description"
+                onChange={onChange}
+                value={description || ""}
+              ></textarea>
+              <input
+                placeholder={language === "french" ? "Adresse" : "Address"}
+                name="address"
+                onChange={onChange}
+                value={address || ""}
+                autoComplete="address-level2"
+              ></input>
+              <input
+                placeholder={
+                  language === "french" ? "Numéro de téléphone" : "Phone number"
+                }
+                name="phoneNumber"
+                onChange={onChange}
+                value={phoneNumber || ""}
+                autoComplete="tel-local"
+              ></input>
+              <input
+                placeholder={language === "french" ? "Courriel" : "Email"}
+                name="email"
+                onChange={onChange}
+                value={email || ""}
+                autoComplete="email"
+              ></input>
+              <input
+                placeholder={language === "french" ? "Site web" : "Website"}
+                name="website"
+                onChange={onChange}
+                value={website || ""}
+              ></input>
+              <input
+                placeholder="GitHub"
+                name="gitHub"
+                onChange={onChange}
+                value={gitHub || ""}
+              ></input>
+              <input
+                placeholder="LinkedIn"
+                name="linkedIn"
+                onChange={onChange}
+                value={linkedIn || ""}
+              ></input>
+            </>
+          )}
+          <button
+            className="form--button"
+            onClick={(e) => {
+              e.preventDefault();
+              setPersonalInformationVisible((prevState) => !prevState);
+            }}
+          >
+            {personalInformationVisible
+              ? language === "french"
+                ? "Cacher"
+                : "Hide"
+              : language === "french"
+              ? "Afficher"
+              : "Unhide"}
+          </button>
         </div>
 
         <div className="form--categories">
           <h3 className="form--title">
             {language === "french" ? "Projet" : "Project"}
           </h3>
-          {projects.map((item) => (
-            <FormProject
-              language={language}
-              key={item.id}
-              id={item.id}
-              name={item.id + 1}
-              onChange={(e) => onCustomPartChange(e, "project")}
-            />
-          ))}
+          {projectsVisible &&
+            projects.map((item) => (
+              <FormProject
+                language={language}
+                key={item.id}
+                id={item.id}
+                name={item.id + 1}
+                onChange={(e) => onCustomPartChange(e, "project")}
+                projects={projects}
+              />
+            ))}
           <button
             className="form--button"
             onClick={(e) => deleteSection(e, "project")}
@@ -118,21 +179,38 @@ export default function Form({
           >
             {language === "french" ? "Ajouter" : "Add"}
           </button>
+          <button
+            className="form--button"
+            onClick={(e) => {
+              e.preventDefault();
+              setProjectsVisible((prevState) => !prevState);
+            }}
+          >
+            {projectsVisible
+              ? language === "french"
+                ? "Cacher"
+                : "Hide"
+              : language === "french"
+              ? "Afficher"
+              : "Unhide"}
+          </button>
         </div>
 
         <div className="form--categories">
           <h3 className="form--title">
             {language === "french" ? "Expérience" : "Experience"}
           </h3>
-          {experiences.map((item) => (
-            <FormExperience
-              language={language}
-              key={item.id}
-              id={item.id}
-              name={item.id + 1}
-              onChange={(e) => onCustomPartChange(e, "experience")}
-            />
-          ))}
+          {experiencesVisible &&
+            experiences.map((item) => (
+              <FormExperience
+                language={language}
+                key={item.id}
+                id={item.id}
+                name={item.id + 1}
+                onChange={(e) => onCustomPartChange(e, "experience")}
+                experiences={experiences}
+              />
+            ))}
           <button
             className="form--button"
             onClick={(e) => deleteSection(e, "experience")}
@@ -145,21 +223,38 @@ export default function Form({
           >
             {language === "french" ? "Ajouter" : "Add"}
           </button>
+          <button
+            className="form--button"
+            onClick={(e) => {
+              e.preventDefault();
+              setExperiencesVisible((prevState) => !prevState);
+            }}
+          >
+            {experiencesVisible
+              ? language === "french"
+                ? "Cacher"
+                : "Hide"
+              : language === "french"
+              ? "Afficher"
+              : "Unhide"}
+          </button>
         </div>
 
         <div className="form--categories">
           <h3 className="form--title">
             {language === "french" ? "Formation" : "Education"}
           </h3>
-          {educations.map((item) => (
-            <FormEducation
-              language={language}
-              key={item.id}
-              id={item.id}
-              name={item.id + 1}
-              onChange={(e) => onCustomPartChange(e, "education")}
-            />
-          ))}
+          {educationsVisible &&
+            educations.map((item) => (
+              <FormEducation
+                language={language}
+                key={item.id}
+                id={item.id}
+                name={item.id + 1}
+                onChange={(e) => onCustomPartChange(e, "education")}
+                educations={educations}
+              />
+            ))}
           <button
             className="form--button"
             onClick={(e) => deleteSection(e, "education")}
@@ -172,21 +267,38 @@ export default function Form({
           >
             {language === "french" ? "Ajouter" : "Add"}
           </button>
+          <button
+            className="form--button"
+            onClick={(e) => {
+              e.preventDefault();
+              setEducationsVisible((prevState) => !prevState);
+            }}
+          >
+            {educationsVisible
+              ? language === "french"
+                ? "Cacher"
+                : "Hide"
+              : language === "french"
+              ? "Afficher"
+              : "Unhide"}
+          </button>
         </div>
 
         <div className="form--categories">
           <h3 className="form--title">
             {language === "french" ? "Compétences" : "Skills"}
           </h3>
-          {skills.map((item) => (
-            <FormSkill
-              language={language}
-              key={item.id}
-              id={item.id}
-              name={item.id + 1}
-              onChange={(e) => onCustomPartChange(e, "skill")}
-            />
-          ))}
+          {skillsVisible &&
+            skills.map((item) => (
+              <FormSkill
+                language={language}
+                key={item.id}
+                id={item.id}
+                name={item.id + 1}
+                onChange={(e) => onCustomPartChange(e, "skill")}
+                skills={skills}
+              />
+            ))}
           <button
             className="form--button"
             onClick={(e) => deleteSection(e, "skill")}
@@ -199,6 +311,21 @@ export default function Form({
           >
             {language === "french" ? "Ajouter" : "Add"}
           </button>
+          <button
+            className="form--button"
+            onClick={(e) => {
+              e.preventDefault();
+              setSkillsVisible((prevState) => !prevState);
+            }}
+          >
+            {skillsVisible
+              ? language === "french"
+                ? "Cacher"
+                : "Hide"
+              : language === "french"
+              ? "Afficher"
+              : "Unhide"}
+          </button>
         </div>
 
         <div className="form--categories">
@@ -209,6 +336,7 @@ export default function Form({
             placeholder={language === "french" ? "Intérêts" : "Interests"}
             name="hobbies"
             onChange={onChange}
+            value={hobbies ? hobbies : ""}
           ></textarea>
         </div>
 

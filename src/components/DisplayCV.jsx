@@ -74,22 +74,22 @@ export default function DisplayCV(props) {
         <div className="cv--personal-details-container">
           {props.address[0] && (
             <div className="cv--personal-details">
-              <Icon path={mdiMapMarker} size={1} color="black" />
+              <Icon path={mdiMapMarker} size={1} color="#005180" />
 
               <p>{props.address}</p>
             </div>
           )}
           <div className="cv--personal-details">
-            <Icon path={mdiPhone} size={1} color="black" />
+            <Icon path={mdiPhone} size={1} color="#005180" />
             <p>{props.phoneNumber}</p>
           </div>
           <div className="cv--personal-details">
-            <Icon path={mdiEmail} size={1} color="black" />
+            <Icon path={mdiEmail} size={1} color="#005180" />
             <p>{props.email}</p>
           </div>
           {props.website[0] && (
             <div className="cv--personal-details">
-              <Icon path={mdiWeb} size={1} color="black" />
+              <Icon path={mdiWeb} size={1} color="#005180" />
               <a href={props.website} target="_blank" rel="noreferrer">
                 {props.website}
               </a>
@@ -97,7 +97,7 @@ export default function DisplayCV(props) {
           )}
           {props.linkedIn[0] && (
             <div className="cv--personal-details">
-              <Icon path={mdiLinkedin} size={1} color="black" />
+              <Icon path={mdiLinkedin} size={1} color="#005180" />
               <a href={props.linkedIn} target="_blank" rel="noreferrer">
                 {props.linkedIn}
               </a>
@@ -105,7 +105,7 @@ export default function DisplayCV(props) {
           )}
           {props.gitHub[0] && (
             <div className="cv--personal-details">
-              <Icon path={mdiGithub} size={1} color="black" />
+              <Icon path={mdiGithub} size={1} color="#005180" />
               <a href={props.gitHub} target="_blank" rel="noreferrer">
                 {props.gitHub}
               </a>
@@ -118,10 +118,6 @@ export default function DisplayCV(props) {
           <div className="cv--photo-container">
             {props.photo && <img className="cv--image" src={props.photo} />}
           </div>
-
-          <h3 className="cv--title">
-            {props.language === "french" ? "Contact" : "Contact"}
-          </h3>
 
           {props.skills.length > 0 && (
             <h3 className="cv--title">

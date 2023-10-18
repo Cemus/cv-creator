@@ -8,6 +8,7 @@ export default function FormExperience(props) {
         key={`role${props.id}`}
         name="role"
         onChange={props.onChange}
+        value={props.experiences[props.id].role || ""}
       ></input>
       <input
         id={props.id}
@@ -15,6 +16,7 @@ export default function FormExperience(props) {
         key={`company${props.id}`}
         name="company"
         onChange={props.onChange}
+        value={props.experiences[props.id].company || ""}
       ></input>
 
       <input
@@ -23,6 +25,7 @@ export default function FormExperience(props) {
         key={`city${props.id}`}
         name="city"
         onChange={props.onChange}
+        value={props.experiences[props.id].city || ""}
       ></input>
       <input
         id={props.id}
@@ -30,6 +33,7 @@ export default function FormExperience(props) {
         key={`from${props.id}`}
         name="from"
         onChange={props.onChange}
+        value={props.experiences[props.id].from || ""}
       ></input>
       <input
         id={props.id}
@@ -37,6 +41,7 @@ export default function FormExperience(props) {
         key={`to${props.id}`}
         name="to"
         onChange={props.onChange}
+        value={props.experiences[props.id].to || ""}
       ></input>
     </>
   );

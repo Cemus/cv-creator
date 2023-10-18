@@ -48,7 +48,7 @@ input::placeholder {
   content: "";
   position: relative;
   display: block;
-  background-color: var(--darkAccent);
+  background-color: var(--main);
   top: 0.25rem;
   width: 100%;
   height: 1px;

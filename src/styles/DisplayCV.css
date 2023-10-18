@@ -1,3 +1,9 @@
+/* --lightShades: #ffff;
+--lightAccent: #85756e;
+--main: #005180;
+--darkAccent: #6e6b7e;
+--darkShades: #1f1f1f; */
+
 .cv--container {
   position: sticky;
   top: 0;
@@ -26,26 +32,27 @@
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  justify-content: center;
   background-color: white;
   text-align: center;
   color: rgb(20, 20, 20);
   margin: 0.4cm;
-  gap: 5mm;
-  border-bottom: double gray;
+  padding-bottom: 0.4cm;
+  gap: 4mm;
+  border-bottom: double #85756e;
 }
 
 .cv--firstname {
   display: flex;
-  gap: 5mm;
+  gap: 4mm;
   font-size: 1cm;
-  text-transform: uppercase;
   letter-spacing: 0.5mm;
   font-weight: lighter;
+  color: #005180;
 }
 
 .cv--lastname {
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 .cv--job-title {
@@ -55,10 +62,10 @@
 .cv--personal-details-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   gap: 0.5cm;
-  margin-bottom: 0.4cm;
 }
 
 .cv--personal-details {
@@ -69,7 +76,7 @@
 
 .cv--personal-details,
 .cv--personal-details > .cv--title {
-  color: black;
+  color: #1f1f1f;
 }
 
 /* Aside */
@@ -77,6 +84,8 @@
 .cv--aside {
   grid-area: left;
   background-color: white;
+  border-right: double #85756e;
+  margin-bottom: 0.4cm;
 }
 
 aside {
@@ -100,13 +109,14 @@ aside {
 
 .cv--skill-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.25cm;
   color: white;
 }
 
 .cv--skill {
   list-style: none;
-  background-color: darkslategray;
+  background-color: var(--main);
   border-radius: 1mm;
   padding-inline: 2mm;
   padding-block: 1mm;
@@ -135,20 +145,27 @@ section {
   line-height: 0.6cm;
   max-width: 13cm;
   overflow-wrap: break-word;
-  color: var(--darkShades);
+  color: #1f1f1f;
   margin-bottom: 1cm;
 }
 
 .cv--title {
-  background-color: darkslategrey;
-  text-align: center;
-  color: white;
+  color: 005180;
   padding: 5px;
-  font-size: 4mm;
+  font-size: 5mm;
   margin-bottom: 0.5cm;
-  text-transform: uppercase;
   letter-spacing: 1px;
   border-radius: 2px;
+}
+
+.cv--title:before {
+  content: "";
+  background-color: #005180;
+  position: relative;
+  top: 0;
+  padding-right: 1mm;
+  margin-right: 1mm;
+  border-radius: 1cm;
 }
 
 .cv--project-container {
@@ -203,6 +220,6 @@ section {
 }
 
 a {
-  color: rgb(70, 96, 241);
+  color: 005180;
   text-underline-offset: 0.5mm;
 }

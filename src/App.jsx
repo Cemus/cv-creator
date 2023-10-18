@@ -250,6 +250,17 @@ export default function App() {
           projects={projects}
           experiences={experiences}
           educations={educations}
+          firstName={informations.firstName}
+          lastName={informations.lastName}
+          title={informations.title}
+          description={informations.description}
+          address={informations.address}
+          phoneNumber={informations.phoneNumber}
+          email={informations.email}
+          website={informations.website}
+          linkedIn={informations.linkedIn}
+          gitHub={informations.gitHub}
+          hobbies={informations.hobbies}
           onChange={handleInformationChange}
           onCustomPartChange={handleCustomPartChange}
           addSection={addSection}

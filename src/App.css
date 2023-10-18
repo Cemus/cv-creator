@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&family=Roboto&display=swap");
 
 #root {
-  --lightShades: #dfded1;
-  --lightAccent: #70a9d5;
-  --main: #32329d;
+  --lightShades: #ffff;
+  --lightAccent: #85756e;
+  --main: #005180;
   --darkAccent: #6e6b7e;
-  --darkShades: #1a1b23;
+  --darkShades: #1f1f1f;
 }
 
 * {
