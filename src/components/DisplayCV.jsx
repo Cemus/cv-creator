@@ -1,4 +1,13 @@
 import "../styles/DisplayCV.css";
+import Icon from "@mdi/react";
+import {
+  mdiEmail,
+  mdiGithub,
+  mdiLinkedin,
+  mdiMapMarker,
+  mdiPhone,
+  mdiWeb,
+} from "@mdi/js";
 
 export default function DisplayCV(props) {
   const skillsRenderer = props.skills.map((ski) => {
@@ -57,45 +66,62 @@ export default function DisplayCV(props) {
   return (
     <main className="cv--container">
       <div className="cv--header">
-        <h1 className="cv--firstname-lastname">
-          <div className="cv--firstname">{props.firstName}</div>
-          <div className="cv--lastname">{props.lastName}</div>
+        <h1 className="cv--firstname">
+          {props.firstName}
+          <span className="cv--lastname">{props.lastName}</span>
         </h1>
-        <h3 className="cv--job-title">{props.title}</h3>
+        <h2 className="cv--job-title">{props.title}</h2>
+        <div className="cv--personal-details-container">
+          {props.address[0] && (
+            <div className="cv--personal-details">
+              <Icon path={mdiMapMarker} size={1} color="black" />
+
+              <p>{props.address}</p>
+            </div>
+          )}
+          <div className="cv--personal-details">
+            <Icon path={mdiPhone} size={1} color="black" />
+            <p>{props.phoneNumber}</p>
+          </div>
+          <div className="cv--personal-details">
+            <Icon path={mdiEmail} size={1} color="black" />
+            <p>{props.email}</p>
+          </div>
+          {props.website[0] && (
+            <div className="cv--personal-details">
+              <Icon path={mdiWeb} size={1} color="black" />
+              <a href={props.website} target="_blank" rel="noreferrer">
+                {props.website}
+              </a>
+            </div>
+          )}
+          {props.linkedIn[0] && (
+            <div className="cv--personal-details">
+              <Icon path={mdiLinkedin} size={1} color="black" />
+              <a href={props.linkedIn} target="_blank" rel="noreferrer">
+                {props.linkedIn}
+              </a>
+            </div>
+          )}
+          {props.gitHub[0] && (
+            <div className="cv--personal-details">
+              <Icon path={mdiGithub} size={1} color="black" />
+              <a href={props.gitHub} target="_blank" rel="noreferrer">
+                {props.gitHub}
+              </a>
+            </div>
+          )}
+        </div>
       </div>
       <div className="cv--aside">
         <aside>
           <div className="cv--photo-container">
             {props.photo && <img className="cv--image" src={props.photo} />}
           </div>
-          <div>
-            <h3 className="cv--title">
-              {props.language === "french" ? "Profil" : "Description"}
-            </h3>
-            <p className="cv--description">{props.description}</p>
-          </div>
 
           <h3 className="cv--title">
             {props.language === "french" ? "Contact" : "Contact"}
           </h3>
-          <div className="cv--personal-details-container">
-            <div className="cv--personal-details">
-              <h4> {props.language === "french" ? "Adresse" : "Address"}</h4>
-              <p>{props.address}</p>
-            </div>
-            <div className="cv--personal-details">
-              <h4>
-                {props.language === "french"
-                  ? "Numéro de téléphone"
-                  : "Phone number"}
-              </h4>
-              <p>{props.phoneNumber}</p>
-            </div>
-            <div className="cv--personal-details">
-              <h4>{props.language === "french" ? "Courriel" : "Email"}</h4>
-              <p>{props.email}</p>
-            </div>
-          </div>
 
           {props.skills.length > 0 && (
             <h3 className="cv--title">
@@ -107,6 +133,12 @@ export default function DisplayCV(props) {
       </div>
       <div className="cv--main-section">
         <section>
+          <div>
+            <h3 className="cv--title">
+              {props.language === "french" ? "Profil" : "Profile"}
+            </h3>
+            <p className="cv--description">{props.description}</p>
+          </div>
           <div>
             <h3 className="cv--title">
               {props.language === "french" ? "Projets" : "Projects"}

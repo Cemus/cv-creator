@@ -3,7 +3,7 @@ import html2pdf from "html2pdf.js";
 import Header from "./components/Header";
 import Form from "./components/Form";
 import DisplayCV from "./components/DisplayCV";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function App() {
   const [language, setLanguage] = useState("english");
@@ -60,8 +60,43 @@ export default function App() {
     address: "San Fransisco",
     phoneNumber: "77 77 77 77 77",
     email: "77@lol.com",
+    website: "",
+    linkedIn: "",
+    gitHub: "",
     hobbies: "",
   });
+
+  useEffect(() => {
+    const itemsToStore = [
+      "informations",
+      "skills",
+      "projects",
+      "experiences",
+      "educations",
+    ];
+    itemsToStore.forEach((item) => {
+      const property = JSON.parse(localStorage.getItem(`${item}`));
+      if (property) {
+        switch (item) {
+          case "informations":
+            setInformations({ ...property, photo: "" });
+            break;
+          case "skills":
+            setSkills(property);
+            break;
+          case "projects":
+            setProjects(property);
+            break;
+          case "experiences":
+            setExperiences(property);
+            break;
+          case "educations":
+            setEducations(property);
+            break;
+        }
+      }
+    });
+  }, []);
 
   const pdfRef = useRef(null);
   const handleDownloadPDF = () => {
@@ -96,6 +131,7 @@ export default function App() {
           const skillCopy = [...skills];
           skillCopy[id][inputConcernee] = value;
           setSkills(skillCopy);
+          localStorage.setItem("skills", JSON.stringify(skillCopy));
         }
         break;
       case "project":
@@ -103,6 +139,7 @@ export default function App() {
           const projectCopy = [...projects];
           projectCopy[id][inputConcernee] = value;
           setProjects(projectCopy);
+          localStorage.setItem("projects", JSON.stringify(projectCopy));
         }
         break;
       case "experience":
@@ -110,6 +147,7 @@ export default function App() {
           const experienceCopy = [...experiences];
           experienceCopy[id][inputConcernee] = value;
           setExperiences(experienceCopy);
+          localStorage.setItem("experiences", JSON.stringify(experienceCopy));
         }
         break;
 
@@ -118,6 +156,7 @@ export default function App() {
           const educationCopy = [...educations];
           educationCopy[id][inputConcernee] = value;
           setEducations(educationCopy);
+          localStorage.setItem("educations", JSON.stringify(educations));
         }
         break;
     }
@@ -127,15 +166,19 @@ export default function App() {
     switch (sectionName) {
       case "skill":
         setSkills([...skills, ski]);
+        localStorage.setItem("skills", JSON.stringify(skills));
         break;
       case "project":
         setProjects([...projects, pro]);
+        localStorage.setItem("projects", JSON.stringify(projects));
         break;
       case "experience":
         setExperiences([...experiences, exp]);
+        localStorage.setItem("experiences", JSON.stringify(experiences));
         break;
       case "education":
         setEducations([...educations, edu]);
+        localStorage.setItem("educations", JSON.stringify(educations));
         break;
     }
   }
@@ -143,16 +186,38 @@ export default function App() {
     e.preventDefault();
     switch (sectionName) {
       case "skill":
-        setSkills((prevSki) => prevSki.slice(0, -1));
+        setSkills((prevSki) => {
+          const updatedSkills = prevSki.slice(0, -1);
+          localStorage.setItem("skills", JSON.stringify(updatedSkills));
+          return updatedSkills;
+        });
+
         break;
       case "project":
-        setProjects((prevPro) => prevPro.slice(0, -1));
+        setProjects((prevPro) => {
+          const updatedProjects = prevPro.slice(0, -1);
+          localStorage.setItem("projects", JSON.stringify(updatedProjects));
+          return updatedProjects;
+        });
         break;
       case "experience":
-        setExperiences((prevExp) => prevExp.slice(0, -1));
+        setExperiences((prevExp) => {
+          const updatedExperiences = prevExp.slice(0, -1);
+          localStorage.setItem(
+            "experiences",
+            JSON.stringify(updatedExperiences)
+          );
+          return updatedExperiences;
+        });
+
         break;
       case "education":
-        setEducations((prevEdu) => prevEdu.slice(0, -1));
+        setEducations((prevEdu) => {
+          const updatedEducations = prevEdu.slice(0, -1);
+          localStorage.setItem("educations", JSON.stringify(updatedEducations));
+          return updatedEducations;
+        });
+
         break;
     }
   }
@@ -166,10 +231,14 @@ export default function App() {
       console.log(fileUrl);
     }
 
-    setInformations((prevInformations) => ({
-      ...prevInformations,
-      [name]: type === "file" ? [fileUrl] : [value],
-    }));
+    setInformations((prevInformations) => {
+      const updatedInformations = {
+        ...prevInformations,
+        [name]: type === "file" ? [fileUrl] : [value],
+      };
+      localStorage.setItem("informations", JSON.stringify(updatedInformations));
+      return updatedInformations;
+    });
   }
   return (
     <>
@@ -202,6 +271,9 @@ export default function App() {
             address={informations.address}
             phoneNumber={informations.phoneNumber}
             email={informations.email}
+            website={informations.website}
+            linkedIn={informations.linkedIn}
+            gitHub={informations.gitHub}
             hobbies={informations.hobbies}
           />
         </div>
