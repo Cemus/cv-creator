@@ -41,16 +41,6 @@ export default function Form({
     toPDF();
   }
 
-  const [hobbiesText, setHobbiesText] = useState("");
-  console.log(hobbiesText);
-  console.log(hobbies);
-  const handleEnterToLineBreak = (e, text) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      setHobbiesText(text + "\n");
-    }
-  };
-
   return (
     <div className="form--container">
       <form>
@@ -127,19 +117,31 @@ export default function Form({
                 autoComplete="email"
               ></input>
               <input
-                placeholder={language === "french" ? "Site web" : "Website"}
+                placeholder={
+                  language === "french"
+                    ? "Site web (sans https//)"
+                    : "Website (without https//)"
+                }
                 name="website"
                 onChange={handleInformationChange}
                 value={website || ""}
               ></input>
               <input
-                placeholder="GitHub"
+                placeholder={
+                  language === "french"
+                    ? "GitHub (sans https//)"
+                    : "GitHub (without https//)"
+                }
                 name="gitHub"
                 onChange={handleInformationChange}
                 value={gitHub || ""}
               ></input>
               <input
-                placeholder="LinkedIn"
+                placeholder={
+                  language === "french"
+                    ? "LinkedIn (sans https//)"
+                    : "LinkedIn (without https//)"
+                }
                 name="linkedIn"
                 onChange={handleInformationChange}
                 value={linkedIn || ""}
@@ -347,8 +349,7 @@ export default function Form({
             placeholder={language === "french" ? "Intérêts" : "Interests"}
             name="hobbies"
             onChange={handleInformationChange}
-            onKeyDown={(e) => handleEnterToLineBreak(e, hobbies.value)}
-            value={hobbiesText ? hobbies : ""}
+            value={hobbies ? hobbies : ""}
           ></textarea>
         </div>
 

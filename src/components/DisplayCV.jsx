@@ -10,6 +10,7 @@ import {
 } from "@mdi/js";
 
 export default function DisplayCV(props) {
+  console.log(props.linkedIn);
   const skillsRenderer = props.skills.map((ski) => {
     return (
       <li key={ski.id} className="cv--skill">
@@ -68,11 +69,13 @@ export default function DisplayCV(props) {
   return (
     <main className="cv--container">
       <div className="cv--header">
-        <h1 className="cv--firstname">
-          {props.firstName}
-          <span className="cv--lastname">{props.lastName}</span>
-        </h1>
-        <h2 className="cv--job-title">{props.title}</h2>
+        <div>
+          <h1 className="cv--firstname">
+            {props.firstName}
+            <span className="cv--lastname">{props.lastName}</span>
+          </h1>
+          <h2 className="cv--job-title">{props.title}</h2>
+        </div>
         <div className="cv--personal-details-container">
           {props.address[0] && (
             <div className="cv--personal-details">
@@ -92,7 +95,7 @@ export default function DisplayCV(props) {
           {props.website[0] && (
             <div className="cv--personal-details">
               <Icon path={mdiWeb} size={1} color="#005180" />
-              <a href={props.website} target="_blank" rel="noreferrer">
+              <a href={props.website[0]} target="_blank" rel="noreferrer">
                 {props.website}
               </a>
             </div>
@@ -100,15 +103,23 @@ export default function DisplayCV(props) {
           {props.linkedIn[0] && (
             <div className="cv--personal-details">
               <Icon path={mdiLinkedin} size={1} color="#005180" />
-              <a href={props.linkedIn} target="_blank" rel="noreferrer">
-                {props.linkedIn}
+              <a
+                href={`https://${props.linkedIn[0]}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {props.linkedIn[0]}
               </a>
             </div>
           )}
           {props.gitHub[0] && (
             <div className="cv--personal-details">
               <Icon path={mdiGithub} size={1} color="#005180" />
-              <a href={props.gitHub} target="_blank" rel="noreferrer">
+              <a
+                href={`https://${props.gitHub[0]}`}
+                target="_blank"
+                rel="noreferrer"
+              >
                 {props.gitHub}
               </a>
             </div>
@@ -148,11 +159,12 @@ export default function DisplayCV(props) {
                     ? "Centres d'intérêt"
                     : "Interests"}
                 </h3>
-                <p>{props.hobbies}</p>
-
-                {props.hobbies[0]?.split("\n").map((line, index) => (
-                  <p key={index}>{line}</p>
-                ))}
+                {props.hobbies
+                  .toString()
+                  ?.split("\n")
+                  .map((line, index) => (
+                    <p key={index}>{line}</p>
+                  ))}
               </div>
             )}
           </div>

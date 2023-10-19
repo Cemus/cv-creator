@@ -241,6 +241,7 @@ export default function App() {
       return updatedInformations;
     });
   }
+  console.log(informations.hobbies);
   return (
     <>
       <Header language={language} handleLanguageChange={handleLanguageChange} />
