@@ -8,7 +8,7 @@ import FormEducation from "./FormEducation";
 
 export default function Form({
   language,
-  onChange,
+  handleInformationChange,
   skills,
   projects,
   experiences,
@@ -24,7 +24,7 @@ export default function Form({
   linkedIn,
   gitHub,
   hobbies,
-  onCustomPartChange,
+  handleCustomPartChange,
   deleteSection,
   addSection,
   toPDF,
@@ -35,10 +35,21 @@ export default function Form({
   const [experiencesVisible, setExperiencesVisible] = useState(true);
   const [educationsVisible, setEducationsVisible] = useState(true);
   const [skillsVisible, setSkillsVisible] = useState(true);
+
   function handleDownloadClick(e) {
     e.preventDefault();
     toPDF();
   }
+
+  const [hobbiesText, setHobbiesText] = useState("");
+  console.log(hobbiesText);
+  console.log(hobbies);
+  const handleEnterToLineBreak = (e, text) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      setHobbiesText(text + "\n");
+    }
+  };
 
   return (
     <div className="form--container">
@@ -50,7 +61,7 @@ export default function Form({
             placeholder="Photo"
             name="photo"
             accept="image/*"
-            onChange={onChange}
+            onChange={handleInformationChange}
             title="Choose a photo"
             autoComplete="photo"
           ></input>
@@ -67,7 +78,7 @@ export default function Form({
               <input
                 placeholder={language === "french" ? "Prénom" : "First name"}
                 name="firstName"
-                onChange={onChange}
+                onChange={handleInformationChange}
                 value={firstName || ""}
                 autoComplete="given-name"
               ></input>
@@ -76,26 +87,26 @@ export default function Form({
                   language === "french" ? "Nom de famille" : "Last name"
                 }
                 name="lastName"
-                onChange={onChange}
+                onChange={handleInformationChange}
                 value={lastName || ""}
                 autoComplete="family-name"
               ></input>
               <input
                 placeholder={language === "french" ? "Métier" : "Title"}
                 name="title"
-                onChange={onChange}
+                onChange={handleInformationChange}
                 value={title || ""}
               ></input>
               <textarea
                 placeholder={language === "french" ? "Profil" : "Description"}
                 name="description"
-                onChange={onChange}
+                onChange={handleInformationChange}
                 value={description || ""}
               ></textarea>
               <input
                 placeholder={language === "french" ? "Adresse" : "Address"}
                 name="address"
-                onChange={onChange}
+                onChange={handleInformationChange}
                 value={address || ""}
                 autoComplete="address-level2"
               ></input>
@@ -104,33 +115,33 @@ export default function Form({
                   language === "french" ? "Numéro de téléphone" : "Phone number"
                 }
                 name="phoneNumber"
-                onChange={onChange}
+                onChange={handleInformationChange}
                 value={phoneNumber || ""}
                 autoComplete="tel-local"
               ></input>
               <input
                 placeholder={language === "french" ? "Courriel" : "Email"}
                 name="email"
-                onChange={onChange}
+                onChange={handleInformationChange}
                 value={email || ""}
                 autoComplete="email"
               ></input>
               <input
                 placeholder={language === "french" ? "Site web" : "Website"}
                 name="website"
-                onChange={onChange}
+                onChange={handleInformationChange}
                 value={website || ""}
               ></input>
               <input
                 placeholder="GitHub"
                 name="gitHub"
-                onChange={onChange}
+                onChange={handleInformationChange}
                 value={gitHub || ""}
               ></input>
               <input
                 placeholder="LinkedIn"
                 name="linkedIn"
-                onChange={onChange}
+                onChange={handleInformationChange}
                 value={linkedIn || ""}
               ></input>
             </>
@@ -157,13 +168,13 @@ export default function Form({
             {language === "french" ? "Projet" : "Project"}
           </h3>
           {projectsVisible &&
-            projects.map((item) => (
+            projects.map((item, acc) => (
               <FormProject
                 language={language}
                 key={item.id}
                 id={item.id}
-                name={item.id + 1}
-                onChange={(e) => onCustomPartChange(e, "project")}
+                numberProject={acc + 1}
+                onChange={(e) => handleCustomPartChange(e, "project", acc)}
                 projects={projects}
               />
             ))}
@@ -201,13 +212,13 @@ export default function Form({
             {language === "french" ? "Expérience" : "Experience"}
           </h3>
           {experiencesVisible &&
-            experiences.map((item) => (
+            experiences.map((item, acc) => (
               <FormExperience
                 language={language}
                 key={item.id}
                 id={item.id}
-                name={item.id + 1}
-                onChange={(e) => onCustomPartChange(e, "experience")}
+                numberExperience={acc + 1}
+                onChange={(e) => handleCustomPartChange(e, "experience", acc)}
                 experiences={experiences}
               />
             ))}
@@ -245,13 +256,13 @@ export default function Form({
             {language === "french" ? "Formation" : "Education"}
           </h3>
           {educationsVisible &&
-            educations.map((item) => (
+            educations.map((item, acc) => (
               <FormEducation
                 language={language}
                 key={item.id}
                 id={item.id}
-                name={item.id + 1}
-                onChange={(e) => onCustomPartChange(e, "education")}
+                numberEducation={acc + 1}
+                onChange={(e) => handleCustomPartChange(e, "education", acc)}
                 educations={educations}
               />
             ))}
@@ -289,13 +300,13 @@ export default function Form({
             {language === "french" ? "Compétences" : "Skills"}
           </h3>
           {skillsVisible &&
-            skills.map((item) => (
+            skills.map((item, acc) => (
               <FormSkill
                 language={language}
                 key={item.id}
                 id={item.id}
-                name={item.id + 1}
-                onChange={(e) => onCustomPartChange(e, "skill")}
+                numberSkill={acc + 1}
+                onChange={(e) => handleCustomPartChange(e, "skill", acc)}
                 skills={skills}
               />
             ))}
@@ -335,8 +346,9 @@ export default function Form({
           <textarea
             placeholder={language === "french" ? "Intérêts" : "Interests"}
             name="hobbies"
-            onChange={onChange}
-            value={hobbies ? hobbies : ""}
+            onChange={handleInformationChange}
+            onKeyDown={(e) => handleEnterToLineBreak(e, hobbies.value)}
+            value={hobbiesText ? hobbies : ""}
           ></textarea>
         </div>
 

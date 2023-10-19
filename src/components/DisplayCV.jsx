@@ -20,12 +20,12 @@ export default function DisplayCV(props) {
   const projectsRenderer = props.projects.map((pro) => {
     return (
       <div key={pro.id} className="cv--project">
-        <p className="cv--project-name">{`${pro.name}`}</p>
-        <p className="cv--project-tech">{`${pro.stack}`}</p>
+        <p className="cv--project-name">{`${pro.nameProject}`}</p>
+        <p className="cv--project-tech">{`${pro.stackProject}`}</p>
         <ul className="cv--project-features">
-          <li>{`${pro.feat1}`}</li>
-          {pro.feat2 && <li>{`${pro.feat2}`}</li>}
-          {pro.feat3 && <li>{`${pro.feat3}`}</li>}
+          <li>{`${pro.feat1Project}`}</li>
+          {pro.feat2Project && <li>{`${pro.feat2Project}`}</li>}
+          {pro.feat3Project && <li>{`${pro.feat3Project}`}</li>}
         </ul>
       </div>
     );
@@ -33,10 +33,10 @@ export default function DisplayCV(props) {
   const experiencesRenderer = props.experiences.map((exp) => {
     return (
       <div key={exp.id} className="cv--career">
-        <p className="cv--career-dates">{`${exp.from} - ${exp.to}`}</p>
+        <p className="cv--career-dates">{`${exp.fromExperience} - ${exp.toExperience}`}</p>
         <div className="cv--career-location">
-          <p>{exp.role}</p>
-          <p>{`${exp.company}, ${exp.city}`}</p>
+          <p>{exp.roleExperience}</p>
+          <p>{`${exp.companyExperience}, ${exp.cityExperience}`}</p>
         </div>
       </div>
     );
@@ -44,19 +44,21 @@ export default function DisplayCV(props) {
 
   const educationRenderer = props.educations.map((edu) => {
     return (
-      <div key={edu.id} className="cv--career">
-        <p className="cv--career-dates">{`${edu.from} - ${edu.to}`}</p>
+      <div key={edu.id} className="cv--education">
+        <p className="cv--career-dates">{`${edu.fromEducation} - ${edu.toEducation}`}</p>
         <div className="cv--career-location">
-          <p>{`${edu.university}, ${edu.city}`}</p>
+          <p>{`${edu.universityEducation}, ${edu.cityEducation}`}</p>
+          {edu.degreeEducation != "" && (
+            <p>
+              {props.language === "french"
+                ? `Diplôme : ${edu.degreeEducation}`
+                : `Degree : ${edu.degreeEducation}`}
+            </p>
+          )}
           <p>
             {props.language === "french"
-              ? `Diplôme : ${edu.degree}`
-              : `Degree : ${edu.degree}`}
-          </p>
-          <p>
-            {props.language === "french"
-              ? `Discipline : ${edu.subject}`
-              : `Subject : ${edu.subject}`}
+              ? `Discipline : ${edu.subjectEducation}`
+              : `Subject : ${edu.subjectEducation}`}
           </p>
         </div>
       </div>
@@ -115,26 +117,58 @@ export default function DisplayCV(props) {
       </div>
       <div className="cv--aside">
         <aside>
-          <div className="cv--photo-container">
-            {props.photo && <img className="cv--image" src={props.photo} />}
-          </div>
-
-          {props.skills.length > 0 && (
-            <h3 className="cv--title">
-              {props.language === "french" ? "Compétences" : "Skills"}
-            </h3>
+          {props.photo && (
+            <div className="cv--photo-container">
+              <img className="cv--image" src={props.photo} />
+            </div>
           )}
-          <ul className="cv--skill-container">{skillsRenderer}</ul>
-        </aside>
-      </div>
-      <div className="cv--main-section">
-        <section>
+
+          <div>
+            {props.skills[0]?.skill !== "" && (
+              <>
+                <h3 className="cv--title">
+                  {props.language === "french" ? "Compétences" : "Skills"}
+                </h3>
+                <ul className="cv--skill-container">{skillsRenderer}</ul>
+              </>
+            )}
+          </div>
           <div>
             <h3 className="cv--title">
-              {props.language === "french" ? "Profil" : "Profile"}
+              {props.language === "french" ? "Formation" : "Education"}
             </h3>
-            <p className="cv--description">{props.description}</p>
+            <div className="cv--career-container">{educationRenderer}</div>
           </div>
+
+          <div>
+            {props.hobbies != "" && (
+              <div>
+                <h3 className="cv--title">
+                  {props.language === "french"
+                    ? "Centres d'intérêt"
+                    : "Interests"}
+                </h3>
+                <p>{props.hobbies}</p>
+
+                {props.hobbies[0]?.split("\n").map((line, index) => (
+                  <p key={index}>{line}</p>
+                ))}
+              </div>
+            )}
+          </div>
+        </aside>
+      </div>
+
+      <div className="cv--main-section">
+        <section>
+          {props.description[0] !== "" && (
+            <div>
+              <h3 className="cv--title">
+                {props.language === "french" ? "Profil" : "Profile"}
+              </h3>
+              <p className="cv--description">{props.description}</p>
+            </div>
+          )}
           <div>
             <h3 className="cv--title">
               {props.language === "french" ? "Projets" : "Projects"}
@@ -150,24 +184,6 @@ export default function DisplayCV(props) {
             </h3>
             <div className="cv--career-container">{experiencesRenderer}</div>
           </div>
-
-          <div>
-            <h3 className="cv--title">
-              {props.language === "french" ? "Formation" : "Education"}
-            </h3>
-            <div className="cv--career-container">{educationRenderer}</div>
-          </div>
-
-          {props.hobbies != "" && (
-            <div>
-              <h3 className="cv--title">
-                {props.language === "french"
-                  ? "Centres d'intérêt"
-                  : "Interests"}
-              </h3>
-              <p>{props.hobbies}</p>
-            </div>
-          )}
         </section>
       </div>
     </main>

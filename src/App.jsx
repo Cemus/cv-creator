@@ -18,37 +18,38 @@ export default function App() {
   const [educations, setEducations] = useState([]);
 
   const ski = {
-    id: skills.length,
+    id: `Sk${skills.length}`,
     key: skills.length,
     skill: "",
   };
   const pro = {
-    id: projects.length,
+    id: `Pr${projects.length}`,
+    numberProject: projects.length,
     key: projects.length,
-    name: "",
-    stack: "",
-    feat1: "",
-    feat2: "",
-    feat3: "",
+    nameProject: "",
+    stackProject: "",
+    feat1Project: "",
+    feat2Project: "",
+    feat3Project: "",
   };
   const exp = {
-    id: experiences.length,
+    id: `Ex${experiences.length}`,
     key: experiences.length,
-    role: "",
-    company: "",
-    city: "",
-    from: "",
-    to: "",
+    roleExperience: "",
+    companyExperience: "",
+    cityExperience: "",
+    fromExperience: "",
+    toExperience: "",
   };
   const edu = {
-    id: educations.length,
+    id: `Ed${educations.length}`,
     key: educations.length,
-    university: "",
-    city: "",
-    degree: "",
-    subject: "",
-    from: "",
-    to: "",
+    universityEducation: "",
+    cityEducation: "",
+    degreeEducation: "",
+    subjectEducation: "",
+    fromEducation: "",
+    toEducation: "",
   };
 
   const [informations, setInformations] = useState({
@@ -122,14 +123,14 @@ export default function App() {
       .save();
   };
 
-  function handleCustomPartChange(e, sectionName) {
-    const { id, name, value } = e.target;
+  function handleCustomPartChange(e, sectionName, currentPartChanging) {
+    const { name, value } = e.target;
     const inputConcernee = name;
     switch (sectionName) {
       case "skill":
         {
           const skillCopy = [...skills];
-          skillCopy[id][inputConcernee] = value;
+          skillCopy[currentPartChanging][inputConcernee] = value;
           setSkills(skillCopy);
           localStorage.setItem("skills", JSON.stringify(skillCopy));
         }
@@ -137,7 +138,7 @@ export default function App() {
       case "project":
         {
           const projectCopy = [...projects];
-          projectCopy[id][inputConcernee] = value;
+          projectCopy[currentPartChanging][inputConcernee] = value;
           setProjects(projectCopy);
           localStorage.setItem("projects", JSON.stringify(projectCopy));
         }
@@ -145,7 +146,7 @@ export default function App() {
       case "experience":
         {
           const experienceCopy = [...experiences];
-          experienceCopy[id][inputConcernee] = value;
+          experienceCopy[currentPartChanging][inputConcernee] = value;
           setExperiences(experienceCopy);
           localStorage.setItem("experiences", JSON.stringify(experienceCopy));
         }
@@ -154,7 +155,7 @@ export default function App() {
       case "education":
         {
           const educationCopy = [...educations];
-          educationCopy[id][inputConcernee] = value;
+          educationCopy[currentPartChanging][inputConcernee] = value;
           setEducations(educationCopy);
           localStorage.setItem("educations", JSON.stringify(educations));
         }
@@ -261,8 +262,8 @@ export default function App() {
           linkedIn={informations.linkedIn}
           gitHub={informations.gitHub}
           hobbies={informations.hobbies}
-          onChange={handleInformationChange}
-          onCustomPartChange={handleCustomPartChange}
+          handleInformationChange={handleInformationChange}
+          handleCustomPartChange={handleCustomPartChange}
           addSection={addSection}
           deleteSection={deleteSection}
           toPDF={handleDownloadPDF}

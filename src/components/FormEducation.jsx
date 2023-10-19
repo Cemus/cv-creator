@@ -1,58 +1,65 @@
 export default function FormEducation(props) {
-  console.log(props.educations);
   return (
     <>
-      <h4>{`${props.name})`}</h4>
+      <h4>{`${props.numberEducation})`}</h4>
       <input
-        id={`University name${props.id}`}
+        id={`universityEducation${props.id}`}
         placeholder={
           props.language === "french" ? "Établissement" : "Establishment"
         }
         key={`University name${props.id}`}
-        name="university"
+        name="universityEducation"
         onChange={props.onChange}
-        value={props.educations[props.id].university || ""}
-      ></input>
-      <input
-        id={`city${props.id}`}
-        placeholder={props.language === "french" ? "Ville" : "City"}
-        key={`city${props.id}`}
-        name="city"
-        onChange={props.onChange}
-        value={props.educations[props.id].city || ""}
+        value={
+          props.educations[props.numberEducation - 1].universityEducation || ""
+        }
       ></input>
 
       <input
-        id={`degree${props.id}`}
+        id={`cityEducation${props.id}`}
+        placeholder={props.language === "french" ? "Ville" : "City"}
+        key={`cityEducation${props.id}`}
+        name="cityEducation"
+        onChange={props.onChange}
+        value={props.educations[props.numberEducation - 1].cityEducation || ""}
+        autoComplete="off"
+      ></input>
+
+      <input
+        id={`degreeEducation${props.id}`}
         placeholder={props.language === "french" ? "Diplôme" : "Degree"}
-        key={`degree${props.id}`}
-        name="degree"
+        key={`degreeEducation${props.id}`}
+        name="degreeEducation"
         onChange={props.onChange}
-        value={props.educations[props.id].degree || ""}
+        value={
+          props.educations[props.numberEducation - 1].degreeEducation || ""
+        }
       ></input>
       <input
-        id={`subject${props.id}`}
+        id={`subjectEducation${props.id}`}
         placeholder={props.language === "french" ? "Discipline" : "Subject"}
-        key={`subject${props.id}`}
-        name="subject"
+        key={`subjectEducation${props.id}`}
+        name="subjectEducation"
         onChange={props.onChange}
-        value={props.educations[props.id].subject || ""}
+        value={
+          props.educations[props.numberEducation - 1].subjectEducation || ""
+        }
       ></input>
       <input
-        id={`from${props.id}`}
+        id={`fromEducation${props.id}`}
         placeholder={props.language === "french" ? "De" : "From"}
-        key={`from${props.id}`}
-        name="from"
+        key={`fromEducation${props.id}`}
+        name="fromEducation"
         onChange={props.onChange}
-        value={props.educations[props.id].from || ""}
+        value={props.educations[props.numberEducation - 1].fromEducation || ""}
       ></input>
       <input
-        id={`to${props.id}`}
+        id={`toEducation${props.id}`}
         placeholder={props.language === "french" ? "À" : "To"}
-        key={`to${props.id}`}
-        name="to"
+        key={`toEducation${props.id}`}
+        name="toEducation"
         onChange={props.onChange}
-        value={props.educations[props.id].to || ""}
+        value={props.educations[props.numberEducation - 1].toEducation || ""}
       ></input>
     </>
   );

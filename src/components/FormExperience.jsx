@@ -1,47 +1,56 @@
 export default function FormExperience(props) {
   return (
     <>
-      <h4>{`${props.name})`}</h4>
+      <h4>{`${props.numberExperience})`}</h4>
       <input
-        id={props.id}
+        id={`roleExperience${props.id}`}
         placeholder={props.language === "french" ? "Fonction" : "Role"}
-        key={`role${props.id}`}
-        name="role"
+        key={`roleExperience${props.id}`}
+        name="roleExperience"
         onChange={props.onChange}
-        value={props.experiences[props.id].role || ""}
+        value={
+          props.experiences[props.numberExperience - 1].roleExperience || ""
+        }
       ></input>
       <input
-        id={props.id}
+        id={`companyExperience${props.id}`}
         placeholder={props.language === "french" ? "Entreprise" : "Company"}
-        key={`company${props.id}`}
-        name="company"
+        key={`companyExperience${props.id}`}
+        name="companyExperience"
         onChange={props.onChange}
-        value={props.experiences[props.id].company || ""}
+        value={
+          props.experiences[props.numberExperience - 1].companyExperience || ""
+        }
+        autoComplete="off"
       ></input>
 
       <input
-        id={props.id}
+        id={`cityExperience${props.id}`}
         placeholder={props.language === "french" ? "Ville" : "City"}
-        key={`city${props.id}`}
-        name="city"
+        key={`cityExperience${props.id}`}
+        name="cityExperience"
         onChange={props.onChange}
-        value={props.experiences[props.id].city || ""}
+        value={
+          props.experiences[props.numberExperience - 1].cityExperience || ""
+        }
       ></input>
       <input
-        id={props.id}
+        id={`fromExperience${props.id}`}
         placeholder={props.language === "french" ? "De" : "From"}
-        key={`from${props.id}`}
-        name="from"
+        key={`fromExperience${props.id}`}
+        name="fromExperience"
         onChange={props.onChange}
-        value={props.experiences[props.id].from || ""}
+        value={
+          props.experiences[props.numberExperience - 1].fromExperience || ""
+        }
       ></input>
       <input
-        id={props.id}
+        id={`toExperience${props.id}`}
         placeholder={props.language === "french" ? "À" : "To"}
-        key={`to${props.id}`}
-        name="to"
+        key={`toExperience${props.id}`}
+        name="toExperience"
         onChange={props.onChange}
-        value={props.experiences[props.id].to || ""}
+        value={props.experiences[props.numberExperience - 1].toExperience || ""}
       ></input>
     </>
   );
