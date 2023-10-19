@@ -38,7 +38,7 @@
   margin: 0.4cm;
   padding-bottom: 0.4cm;
   gap: 4mm;
-  border-bottom: double #85756e;
+  border-bottom: solid 0.5mm #005180;
 }
 
 .cv--firstname {
@@ -84,7 +84,7 @@
 .cv--aside {
   grid-area: left;
   background-color: white;
-  border-right: double #85756e;
+  border-right: solid 0.5mm #005180;
   margin-bottom: 0.4cm;
 }
 
@@ -163,6 +163,7 @@ section {
   background-color: #005180;
   position: relative;
   top: 0;
+  right: 1mm;
   padding-right: 1mm;
   margin-right: 1mm;
   border-radius: 1cm;
@@ -177,6 +178,7 @@ section {
 .cv--project {
   display: flex;
   flex-direction: column;
+  gap: 2mm;
 }
 
 .cv--project-name {
@@ -191,7 +193,8 @@ section {
 
 .cv--project-features {
   font-size: 4mm;
-  list-style: inside;
+  /*   list-style: inside; <= souci avec l'export*/
+  margin-left: 4mm;
 }
 
 .cv--career-container {

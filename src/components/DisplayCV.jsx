@@ -144,7 +144,9 @@ export default function DisplayCV(props) {
 
           <div>
             <h3 className="cv--title">
-              {props.language === "french" ? "Expérience" : "Experience"}
+              {props.language === "french"
+                ? "Expérience professionnelle"
+                : "Work experience"}
             </h3>
             <div className="cv--career-container">{experiencesRenderer}</div>
           </div>
