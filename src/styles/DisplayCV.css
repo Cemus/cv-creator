@@ -5,8 +5,6 @@
 --darkShades: #1f1f1f; */
 
 .cv--container {
-  position: sticky;
-  top: 0;
   display: grid;
   grid-template-columns: 40% 60%;
   grid-template-rows: 1fr 8fr;
@@ -71,13 +69,13 @@
   grid-template-rows: auto;
   justify-items: flex-end;
   align-items: center;
-  gap: 1rem;
+  gap: 2mm;
 }
 
 .cv--personal-details {
   display: flex;
   align-items: center;
-  justify-self: end;
+  justify-self: last baseline;
   gap: 2mm;
   font-size: small;
 }
@@ -101,7 +99,7 @@ aside {
   flex-direction: column;
   gap: 1cm;
   justify-content: space-between;
-  margin-inline: 0.4cm;
+  margin-inline: 0.75cm;
 }
 
 .cv--photo-container {
@@ -142,11 +140,15 @@ aside {
   background-color: white;
 }
 
+.cv--hobbies {
+  text-align: justify;
+}
+
 section {
   display: flex;
   flex-direction: column;
   gap: 1cm;
-  padding-inline: 0.5cm;
+  padding-inline: 0.75cm;
 }
 
 .cv--description {
@@ -159,7 +161,7 @@ section {
 }
 
 .cv--title {
-  color: 005180;
+  color: #005180;
   padding: 5px;
   font-size: 6mm;
   margin-bottom: 0.5cm;
@@ -182,6 +184,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 0.5cm;
+  text-align: justify;
 }
 
 .cv--project {
@@ -198,12 +201,13 @@ section {
 .cv--project-tech {
   font-size: 4mm;
   font-weight: bold;
+  margin-left: 0.5cm;
 }
 
 .cv--project-features {
-  font-size: 4mm;
+  font-size: 3.75mm;
   /*   list-style: inside; <= souci avec l'export*/
-  margin-left: 4mm;
+  margin-left: 8.5mm;
 }
 
 .cv--career-container {
