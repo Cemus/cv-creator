@@ -181,12 +181,14 @@ export default function DisplayCV(props) {
               <p className="cv--description">{props.description}</p>
             </div>
           )}
-          <div>
-            <h3 className="cv--title">
-              {props.language === "french" ? "Projets" : "Projects"}
-            </h3>
-            <div className="cv--project-container">{projectsRenderer}</div>
-          </div>
+          {props.projects.length > 0 && (
+            <div>
+              <h3 className="cv--title">
+                {props.language === "french" ? "Projets" : "Projects"}
+              </h3>
+              <div className="cv--project-container">{projectsRenderer}</div>
+            </div>
+          )}
 
           <div>
             <h3 className="cv--title">
