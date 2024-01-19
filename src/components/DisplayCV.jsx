@@ -95,8 +95,12 @@ export default function DisplayCV(props) {
           {props.website[0] && (
             <div className="cv--personal-details">
               <Icon path={mdiWeb} size={1} color="#005180" />
-              <a href={props.website[0]} target="_blank" rel="noreferrer">
-                {props.website}
+              <a
+                href={`https://${props.website[0]}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {props.website[0]}
               </a>
             </div>
           )}
@@ -120,7 +124,7 @@ export default function DisplayCV(props) {
                 target="_blank"
                 rel="noreferrer"
               >
-                {props.gitHub}
+                {props.gitHub[0]}
               </a>
             </div>
           )}
