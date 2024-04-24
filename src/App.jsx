@@ -127,12 +127,9 @@ export default function App() {
   };
 
   function handleCustomPartChange(e, sectionName, currentPartChanging) {
-    console.log(e);
     const { name, value } = e.target;
     const inputConcernee = name;
-    console.log(name);
-    console.log(value);
-    console.log(inputConcernee);
+
     switch (sectionName) {
       case "skill":
         {
