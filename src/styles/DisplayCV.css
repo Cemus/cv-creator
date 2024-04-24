@@ -7,7 +7,7 @@
 .cv--container {
   display: grid;
   grid-template-columns: 40% 60%;
-  grid-template-rows: 1fr 8fr;
+  grid-template-rows: min-content auto;
   grid-template-areas:
     "header header"
     "left right";
@@ -18,35 +18,51 @@
   color: #1f1f1f;
   box-shadow: 2px 2px 10px 1px rgba(26, 26, 26, 0.473);
   font-family: "Nunito", sans-serif;
-  font-size: 4mm;
+  font-size: 4.25mm;
   overflow: hidden;
   background-color: white;
 }
 
 /* Header */
 
-.cv--header {
+.cv--header-container {
   grid-area: header;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr;
-  grid-template-areas:
-    "name infos"
-    "title infos";
+  display: flex;
   align-items: center;
+  justify-content: center;
+  border-bottom: solid 0.5mm #005180;
+  margin-inline: 0.4cm;
+}
+.cv--header {
+  display: flex;
   background-color: white;
   color: rgb(20, 20, 20);
   margin: 0.4cm;
-  padding-bottom: 0.4cm;
-  gap: 4mm;
-  border-bottom: solid 0.5mm #005180;
+  padding: 0.4cm;
+  justify-content: center;
+  align-items: center;
+}
+
+.cv--photo-container {
+  position: relative;
+  width: 5cm;
+  height: 5cm;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0.4cm;
+}
+
+.cv--image {
+  position: relative;
+  bottom: 2rem;
+  width: 100%;
+  height: auto;
 }
 
 .cv--firstname {
-  grid-area: name;
   display: flex;
   gap: 4mm;
-  font-size: 1cm;
+  font-size: 1.3cm;
   letter-spacing: 0.5mm;
   font-weight: lighter;
   color: #005180;
@@ -58,31 +74,9 @@
 }
 
 .cv--job-title {
-  grid-area: title;
+  text-align: center;
+  grid-area: name;
   letter-spacing: 1mm;
-}
-
-.cv--personal-details-container {
-  grid-area: infos;
-  display: grid;
-  grid-auto-columns: auto;
-  grid-template-rows: auto;
-  justify-items: flex-end;
-  align-items: center;
-  gap: 2mm;
-}
-
-.cv--personal-details {
-  display: flex;
-  align-items: center;
-  justify-self: last baseline;
-  gap: 2mm;
-  font-size: small;
-}
-
-.cv--personal-details,
-.cv--personal-details > .cv--title {
-  color: #1f1f1f;
 }
 
 /* Aside */
@@ -90,28 +84,16 @@
 .cv--aside {
   grid-area: left;
   background-color: white;
-  border-right: solid 0.5mm #005180;
-  margin-bottom: 0.4cm;
+  margin-block: 0.4cm;
 }
 
 aside {
   display: flex;
   flex-direction: column;
-  gap: 1cm;
-  justify-content: space-between;
-  margin-inline: 0.75cm;
-}
-
-.cv--photo-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cv--image {
-  max-width: 4.5cm;
-  max-height: 6.5cm;
-  border-radius: 1mm;
+  gap: 2cm;
+  padding: 0.4cm;
+  border-right: solid 0.5mm #005180;
+  height: 100%;
 }
 
 .cv--skill-container {
@@ -140,15 +122,26 @@ aside {
   background-color: white;
 }
 
-.cv--hobbies {
+.cv--hobbies-container {
   text-align: justify;
+}
+
+.cv--list {
+  list-style: none;
+}
+
+.cv--list::before {
+  content: "■";
+  padding-right: 0.2cm;
 }
 
 section {
   display: flex;
   flex-direction: column;
+
+  height: 100%;
   gap: 1cm;
-  padding-inline: 0.75cm;
+  padding: 0.75cm;
 }
 
 .cv--description {
@@ -158,6 +151,25 @@ section {
   overflow-wrap: break-word;
   color: #1f1f1f;
   margin-bottom: 1cm;
+}
+
+.cv--personal-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 2mm;
+}
+
+.cv--personal-details {
+  display: flex;
+  align-items: center;
+  justify-self: last baseline;
+  gap: 2mm;
+}
+
+.cv--personal-details,
+.cv--personal-details > .cv--title {
+  color: #1f1f1f;
 }
 
 .cv--title {
@@ -213,19 +225,24 @@ section {
 .cv--career-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5cm;
+  gap: 1cm;
 }
 
 .cv--career {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+
+.cv--career-bis {
   display: flex;
 }
 
 .cv--education {
   display: flex;
-  flex-wrap: wrap;
 }
 
-.cv--career-dates {
+.cv--dates {
   font-weight: bold;
   width: 3.5cm;
 }
@@ -235,6 +252,16 @@ section {
 }
 
 .cv--career-location {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+
+.cv--education-location p:nth-of-type(1) {
+  font-weight: bold;
+}
+
+.cv--education-location {
   display: flex;
   flex-direction: column;
   gap: 2mm;

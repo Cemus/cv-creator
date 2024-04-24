@@ -10,7 +10,6 @@ import {
 } from "@mdi/js";
 
 export default function DisplayCV(props) {
-  console.log(props.linkedIn);
   const skillsRenderer = props.skills.map((ski) => {
     return (
       <li key={ski.id} className="cv--skill">
@@ -34,11 +33,24 @@ export default function DisplayCV(props) {
   const experiencesRenderer = props.experiences.map((exp) => {
     return (
       <div key={exp.id} className="cv--career">
-        <p className="cv--career-dates">{`${exp.fromExperience} - ${exp.toExperience}`}</p>
-        <div className="cv--career-location">
-          <p>{exp.roleExperience}</p>
-          <p>{`${exp.companyExperience}, ${exp.cityExperience}`}</p>
+        <div className="cv--career-bis">
+          <p className="cv--dates">{`${exp.fromExperience} - ${exp.toExperience}`}</p>
+          <div className="cv--career-location">
+            <p>{exp.roleExperience}</p>
+            <p>{`${exp.companyExperience}, ${exp.cityExperience}`}</p>
+          </div>
         </div>
+        {exp.descriptionExperience1 && (
+          <ul>
+            <li className="cv--list">{exp.descriptionExperience1}</li>
+            {exp.descriptionExperience2 && (
+              <li className="cv--list">{exp.descriptionExperience2}</li>
+            )}
+            {exp.descriptionExperience3 && (
+              <li className="cv--list">{exp.descriptionExperience3}</li>
+            )}
+          </ul>
+        )}
       </div>
     );
   });
@@ -46,8 +58,8 @@ export default function DisplayCV(props) {
   const educationRenderer = props.educations.map((edu) => {
     return (
       <div key={edu.id} className="cv--education">
-        <p className="cv--career-dates">{`${edu.fromEducation} - ${edu.toEducation}`}</p>
-        <div className="cv--career-location">
+        <p className="cv--dates">{`${edu.fromEducation} - ${edu.toEducation}`}</p>
+        <div className="cv--education-location">
           <p>{`${edu.universityEducation}, ${edu.cityEducation}`}</p>
           {edu.degreeEducation != "" && (
             <p>
@@ -68,76 +80,83 @@ export default function DisplayCV(props) {
 
   return (
     <main className="cv--container">
-      <div className="cv--header">
-        <div>
-          <h1 className="cv--firstname">
-            {props.firstName}
-            <span className="cv--lastname">{props.lastName}</span>
-          </h1>
-          <h2 className="cv--job-title">{props.title}</h2>
-        </div>
-        <div className="cv--personal-details-container">
-          {props.address[0] && (
-            <div className="cv--personal-details">
-              <Icon path={mdiMapMarker} size={1} color="#005180" />
-
-              <p>{props.address}</p>
-            </div>
-          )}
-          <div className="cv--personal-details">
-            <Icon path={mdiPhone} size={1} color="#005180" />
-            <p>{props.phoneNumber}</p>
+      <div className="cv--header-container">
+        {props.photo && (
+          <div className="cv--photo-container">
+            <img className="cv--image" src={props.photo} />
           </div>
-          <div className="cv--personal-details">
-            <Icon path={mdiEmail} size={1} color="#005180" />
-            <p>{props.email}</p>
+        )}
+        <div className="cv--header">
+          <div>
+            <h1 className="cv--firstname">
+              {props.firstName}
+              <span className="cv--lastname">{props.lastName}</span>
+            </h1>
+            <h2 className="cv--job-title">{props.title}</h2>
           </div>
-          {props.website[0] && (
-            <div className="cv--personal-details">
-              <Icon path={mdiWeb} size={1} color="#005180" />
-              <a
-                href={`https://${props.website[0]}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {props.website[0]}
-              </a>
-            </div>
-          )}
-          {props.linkedIn[0] && (
-            <div className="cv--personal-details">
-              <Icon path={mdiLinkedin} size={1} color="#005180" />
-              <a
-                href={`https://${props.linkedIn[0]}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {props.linkedIn[0]}
-              </a>
-            </div>
-          )}
-          {props.gitHub[0] && (
-            <div className="cv--personal-details">
-              <Icon path={mdiGithub} size={1} color="#005180" />
-              <a
-                href={`https://${props.gitHub[0]}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {props.gitHub[0]}
-              </a>
-            </div>
-          )}
         </div>
       </div>
+
       <div className="cv--aside">
         <aside>
-          {props.photo && (
-            <div className="cv--photo-container">
-              <img className="cv--image" src={props.photo} />
-            </div>
-          )}
+          <div>
+            <h3 className="cv--title">
+              {props.language === "french" ? "Informations" : "Informations"}
+            </h3>
+            <div className="cv--personal-details-container">
+              {props.address[0] && (
+                <div className="cv--personal-details">
+                  <Icon path={mdiMapMarker} size={1} color="#005180" />
 
+                  <p>{props.address}</p>
+                </div>
+              )}
+              <div className="cv--personal-details">
+                <Icon path={mdiPhone} size={1} color="#005180" />
+                <p>{props.phoneNumber}</p>
+              </div>
+              <div className="cv--personal-details">
+                <Icon path={mdiEmail} size={1} color="#005180" />
+                <p>{props.email}</p>
+              </div>
+              {props.website[0] && (
+                <div className="cv--personal-details">
+                  <Icon path={mdiWeb} size={1} color="#005180" />
+                  <a
+                    href={`https://${props.website[0]}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {props.website[0]}
+                  </a>
+                </div>
+              )}
+              {props.linkedIn[0] && (
+                <div className="cv--personal-details">
+                  <Icon path={mdiLinkedin} size={1} color="#005180" />
+                  <a
+                    href={`https://${props.linkedIn[0]}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {props.linkedIn[0]}
+                  </a>
+                </div>
+              )}
+              {props.gitHub[0] && (
+                <div className="cv--personal-details">
+                  <Icon path={mdiGithub} size={1} color="#005180" />
+                  <a
+                    href={`https://${props.gitHub[0]}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {props.gitHub[0]}
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
           <div>
             {props.skills[0]?.skill !== "" && (
               <>
@@ -148,14 +167,8 @@ export default function DisplayCV(props) {
               </>
             )}
           </div>
-          <div>
-            <h3 className="cv--title">
-              {props.language === "french" ? "Formation" : "Education"}
-            </h3>
-            <div className="cv--career-container">{educationRenderer}</div>
-          </div>
 
-          <div className="cv--hobbies">
+          <div className="cv--hobbies-container">
             {props.hobbies != "" && (
               <div>
                 <h3 className="cv--title">
@@ -167,7 +180,11 @@ export default function DisplayCV(props) {
                   .toString()
                   ?.split("\n")
                   .map((line, index) => (
-                    <p key={index}>{line}</p>
+                    <ul key={index}>
+                      <li className="cv--list" key={index}>
+                        {line}
+                      </li>
+                    </ul>
                   ))}
               </div>
             )}
@@ -201,6 +218,12 @@ export default function DisplayCV(props) {
                 : "Work experiences"}
             </h3>
             <div className="cv--career-container">{experiencesRenderer}</div>
+          </div>
+          <div>
+            <h3 className="cv--title">
+              {props.language === "french" ? "Formation" : "Education"}
+            </h3>
+            <div className="cv--career-container">{educationRenderer}</div>
           </div>
         </section>
       </div>

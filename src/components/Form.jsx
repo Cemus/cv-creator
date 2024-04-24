@@ -60,8 +60,8 @@ export default function Form({
         <div className="form--categories">
           <h3 className="form--title">
             {language === "french"
-              ? "Information Personnelle"
-              : "Personal Information"}
+              ? "Informations Personnelles"
+              : "Personal Informations"}
           </h3>
           {personalInformationVisible && (
             <>

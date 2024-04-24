@@ -40,6 +40,9 @@ export default function App() {
     cityExperience: "",
     fromExperience: "",
     toExperience: "",
+    descriptionExperience1: "",
+    descriptionExperience2: "",
+    descriptionExperience3: "",
   };
   const edu = {
     id: `Ed${educations.length}`,
@@ -53,14 +56,14 @@ export default function App() {
   };
 
   const [informations, setInformations] = useState({
-    firstName: "Ryu",
-    lastName: "Joyce",
-    title: "Plongeur",
-    description: "Le maître du karate!",
+    firstName: "John",
+    lastName: "Doe",
+    title: "Worker",
+    description: "",
     photo: "",
     address: "San Fransisco",
-    phoneNumber: "77 77 77 77 77",
-    email: "77@lol.com",
+    phoneNumber: "07 00 70 00 70",
+    email: "john-doe@gmail.com",
     website: "",
     linkedIn: "",
     gitHub: "",
@@ -124,8 +127,12 @@ export default function App() {
   };
 
   function handleCustomPartChange(e, sectionName, currentPartChanging) {
+    console.log(e);
     const { name, value } = e.target;
     const inputConcernee = name;
+    console.log(name);
+    console.log(value);
+    console.log(inputConcernee);
     switch (sectionName) {
       case "skill":
         {
@@ -229,7 +236,6 @@ export default function App() {
     if (type === "file") {
       const file = e.target.files[0];
       fileUrl = URL.createObjectURL(file);
-      console.log(fileUrl);
     }
 
     setInformations((prevInformations) => {
@@ -241,7 +247,6 @@ export default function App() {
       return updatedInformations;
     });
   }
-  console.log(informations.hobbies);
   return (
     <>
       <Header language={language} handleLanguageChange={handleLanguageChange} />

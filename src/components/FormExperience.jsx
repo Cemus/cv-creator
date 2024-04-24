@@ -52,6 +52,46 @@ export default function FormExperience(props) {
         onChange={props.onChange}
         value={props.experiences[props.numberExperience - 1].toExperience || ""}
       ></input>
+      {/*Descriptions*/}
+      <input
+        id={`descriptionExperience1${props.id}`}
+        placeholder={
+          props.language === "french" ? "Description" : "Description"
+        }
+        key={`descriptionExperience1${props.id}`}
+        name="descriptionExperience1"
+        onChange={props.onChange}
+        value={
+          props.experiences[props.numberExperience - 1]
+            .descriptionExperience1 || ""
+        }
+      ></input>
+      <input
+        id={`descriptionExperience2${props.id}`}
+        placeholder={
+          props.language === "french" ? "Description" : "Description"
+        }
+        key={`descriptionExperience2${props.id}`}
+        name="descriptionExperience2"
+        onChange={props.onChange}
+        value={
+          props.experiences[props.numberExperience - 1]
+            .descriptionExperience2 || ""
+        }
+      ></input>
+      <input
+        id={`descriptionExperience3${props.id}`}
+        placeholder={
+          props.language === "french" ? "Description" : "Description"
+        }
+        key={`descriptionExperience3${props.id}`}
+        name="descriptionExperience3"
+        onChange={props.onChange}
+        value={
+          props.experiences[props.numberExperience - 1]
+            .descriptionExperience3 || ""
+        }
+      ></input>
     </>
   );
 }
