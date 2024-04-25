@@ -167,7 +167,12 @@ export default function DisplayCV(props) {
               </>
             )}
           </div>
-
+          <div>
+            <h3 className="cv--title">
+              {props.language === "french" ? "Formation" : "Education"}
+            </h3>
+            <div className="cv--career-container">{educationRenderer}</div>
+          </div>
           <div className="cv--hobbies-container">
             {props.hobbies != "" && (
               <div>
@@ -218,12 +223,6 @@ export default function DisplayCV(props) {
                 : "Work experiences"}
             </h3>
             <div className="cv--career-container">{experiencesRenderer}</div>
-          </div>
-          <div>
-            <h3 className="cv--title">
-              {props.language === "french" ? "Formation" : "Education"}
-            </h3>
-            <div className="cv--career-container">{educationRenderer}</div>
           </div>
         </section>
       </div>

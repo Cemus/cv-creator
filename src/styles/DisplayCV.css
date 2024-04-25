@@ -90,7 +90,7 @@
 aside {
   display: flex;
   flex-direction: column;
-  gap: 2cm;
+  gap: 1cm;
   padding: 0.4cm;
   border-right: solid 0.5mm #005180;
   height: 100%;
