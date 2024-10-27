@@ -29,7 +29,7 @@
   grid-area: header;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   border-bottom: solid 0.5mm #005180;
   margin-inline: 0.4cm;
 }
@@ -84,15 +84,13 @@
 .cv--aside {
   grid-area: left;
   background-color: white;
-  margin-block: 0.4cm;
+  margin: 0.4cm;
 }
 
 aside {
   display: flex;
   flex-direction: column;
   gap: 1cm;
-  padding: 0.4cm;
-  border-right: solid 0.5mm #005180;
   height: 100%;
 }
 
@@ -120,6 +118,9 @@ aside {
 .cv--main-section {
   grid-area: right;
   background-color: white;
+  border-left: solid 0.5mm #005180;
+
+  margin-block: 0.4cm;
 }
 
 .cv--hobbies-container {
@@ -138,19 +139,19 @@ aside {
 section {
   display: flex;
   flex-direction: column;
-
-  height: 100%;
-  gap: 1cm;
-  padding: 0.75cm;
+  gap: 5mm;
+  margin-inline: 0.4cm;
 }
 
 .cv--description {
-  font-style: italic;
   line-height: 0.6cm;
   max-width: 13cm;
   overflow-wrap: break-word;
   color: #1f1f1f;
-  margin-bottom: 1cm;
+}
+
+.cv--description-line {
+  margin-top: 1mm;
 }
 
 .cv--personal-details-container {
@@ -225,7 +226,7 @@ section {
 .cv--career-container {
   display: flex;
   flex-direction: column;
-  gap: 1cm;
+  gap: 0.5cm;
 }
 
 .cv--career {
@@ -236,13 +237,19 @@ section {
 
 .cv--career-bis {
   display: flex;
+  align-items: center;
 }
 
 .cv--education {
   display: flex;
+  align-items: center;
 }
 
 .cv--dates {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
   width: 3.5cm;
 }
@@ -254,6 +261,7 @@ section {
 .cv--career-location {
   display: flex;
   flex-direction: column;
+  padding-inline: 2mm;
   gap: 2mm;
 }
 

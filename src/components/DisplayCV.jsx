@@ -34,7 +34,7 @@ export default function DisplayCV(props) {
     return (
       <div key={exp.id} className="cv--career">
         <div className="cv--career-bis">
-          <p className="cv--dates">{`${exp.fromExperience} - ${exp.toExperience}`}</p>
+          <p className="cv--dates">{`${exp.fromExperience} → ${exp.toExperience}`}</p>
           <div className="cv--career-location">
             <p>{exp.roleExperience}</p>
             <p>{`${exp.companyExperience}, ${exp.cityExperience}`}</p>
@@ -58,7 +58,12 @@ export default function DisplayCV(props) {
   const educationRenderer = props.educations.map((edu) => {
     return (
       <div key={edu.id} className="cv--education">
-        <p className="cv--dates">{`${edu.fromEducation} - ${edu.toEducation}`}</p>
+        <div className="cv--dates">
+          {" "}
+          <p>{edu.fromEducation}</p>
+          <p>↓</p>
+          <p>{edu.toEducation}</p>
+        </div>
         <div className="cv--education-location">
           <p>{`${edu.universityEducation}, ${edu.cityEducation}`}</p>
           {edu.degreeEducation != "" && (
@@ -204,7 +209,18 @@ export default function DisplayCV(props) {
               <h3 className="cv--title">
                 {props.language === "french" ? "Profil" : "Profile"}
               </h3>
-              <p className="cv--description">{props.description}</p>
+              <p className="cv--description">
+                {props.description
+                  .toString()
+                  ?.split("\n")
+                  .map((line, index) => (
+                    <div key={index}>
+                      <p className="cv--description-line" key={index}>
+                        {line}
+                      </p>
+                    </div>
+                  ))}
+              </p>
             </div>
           )}
           {props.projects.length > 0 && (
