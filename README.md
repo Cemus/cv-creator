@@ -14,13 +14,13 @@
 <br />
 <div align="center">
 <a href='https://github.com/Cemus/cv-creator'>
-<img src="public/favicon.svg" alt="Logo" width="80" height="80">
+<img src="public/favicon.svg" alt="Logo" width="80" height="80" fill="#005180">
 </a>
 
 <h3 align='center'>Créateur de CV</h3>
 
 <p align="center">
-Le créateur de CV est une application qui permet de créer, personnaliser et exporter un CV en temps réel.
+Le créateur de CV est une application qui permet de créer, personnaliser et exporter un CV en temps réel.
 <br />
 <a href='https://cemus.github.io/cv-creator/'><strong>Voir le site »</strong></a>
 <br />
